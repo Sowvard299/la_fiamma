@@ -61,7 +61,6 @@ import { itineraire } from '../lib/liens';
     align-self: end;
     padding-inline: var(--marge);
     color: var(--pierre);
-    letter-spacing: -0.03em;
     /* Le nom est dessiné par le WebGL ; le texte reste là, sélectionnable et lu. */
     transition: color 0.3s linear;
   }
@@ -70,15 +69,17 @@ import { itineraire } from '../lib/liens';
     color: transparent;
   }
 
+  /* Le tracking se règle sur chaque ligne : en em, il suit sa propre taille. */
   .nom__la,
   .nom__fiamma {
     display: block;
     width: fit-content;
+    letter-spacing: -0.03em;
   }
 
   .nom {
-    /* « Fiamma » mesure 4,08 em en Young Serif avec ce tracking : il tient pile dans la largeur. */
-    --fiamma: min(calc((100cqi - 2 * var(--marge)) / 4.12), 44svh);
+    /* « Fiamma » mesure 4,04 em en Young Serif avec ce tracking : il occupe toute la largeur utile. */
+    --fiamma: min(calc((100cqi - 2 * var(--marge)) / 4.05), 44svh);
   }
 
   .nom__la {

@@ -194,8 +194,8 @@ export function allumer(feu: HTMLElement) {
     const dpr = Math.min(window.devicePixelRatio || 1, grand ? 1.25 : 1.5);
     largeur = Math.round(cadre.width * dpr);
     hauteur = Math.round(cadre.height * dpr);
-    canvas.width = toile.width = largeur;
-    canvas.height = toile.height = hauteur;
+    canvas!.width = toile.width = largeur;
+    canvas!.height = toile.height = hauteur;
     gl!.viewport(0, 0, largeur, hauteur);
 
     ctx.clearRect(0, 0, largeur, hauteur);
