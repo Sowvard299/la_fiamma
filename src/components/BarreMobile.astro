@@ -1,0 +1,53 @@
+---
+// Sur téléphone, appeler ou réserver reste à portée de pouce une fois le haut de page quitté.
+import { infos } from '../data/infos';
+---
+
+<div class="barre" data-barre>
+  <a class="bouton bouton--braise" href={`tel:${infos.telephone.international}`}>Appeler</a>
+  <a class="bouton bouton--nuit" href="#reserver">Réserver</a>
+</div>
+
+<script>
+  const barre = document.querySelector<HTMLElement>('[data-barre]');
+  const feu = document.querySelector('[data-feu]');
+  const reserver = document.querySelector('#reserver');
+  if (barre && feu && reserver) {
+    const enVue = new Map<Element, boolean>([
+      [feu, true],
+      [reserver, false],
+    ]);
+    const observateur = new IntersectionObserver((entrees) => {
+      for (const e of entrees) enVue.set(e.target, e.isIntersecting);
+      barre.dataset.visible = String(!enVue.get(feu) && !enVue.get(reserver));
+    });
+    observateur.observe(feu);
+    observateur.observe(reserver);
+  }
+</script>
+
+<style>
+  .barre {
+    display: none;
+  }
+
+  @media (max-width: 48rem) {
+    .barre {
+      position: fixed;
+      inset: auto 0 0 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--e-1);
+      padding: var(--e-1) var(--e-1) calc(var(--e-1) + env(safe-area-inset-bottom));
+      background: var(--pierre);
+      border-top: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
+      translate: 0 110%;
+      transition: translate 0.5s var(--ease);
+    }
+
+    .barre[data-visible='true'] {
+      translate: 0 0;
+    }
+  }
+</style>

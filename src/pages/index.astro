@@ -1,7 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import PizzaDuMois from '../components/PizzaDuMois.astro';
+import Carta from '../components/Carta.astro';
+import Reserver from '../components/Reserver.astro';
+import PiedDePage from '../components/PiedDePage.astro';
+import BarreMobile from '../components/BarreMobile.astro';
 ---
 
 <Base>
-  <main id="contenu">La Fiamma</main>
+  <Hero />
+  <main id="contenu">
+    <PizzaDuMois />
+    <Carta />
+    <Reserver />
+  </main>
+  <PiedDePage />
+  <BarreMobile />
 </Base>

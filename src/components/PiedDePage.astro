@@ -1,0 +1,81 @@
+---
+import illustration from '../assets/logo-illustration.svg?url';
+import { infos } from '../data/infos';
+
+const annee = new Date().getFullYear();
+---
+
+<footer class="pied">
+  <img
+    class="pied__dessin"
+    src={illustration}
+    width="1440"
+    height="1440"
+    alt="Le logo de La Fiamma : une flamme sur des bûches, une branche d'olivier"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="pied__texte">
+    <p class="pied__nom">{infos.nom}</p>
+    <p>
+      {infos.description}<br />
+      {`${infos.adresse.rue}, ${infos.adresse.codePostal} ${infos.adresse.ville}`}
+    </p>
+    <p>
+      <a class="chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a><br />
+      <a href={`mailto:${infos.email}`}>{infos.email}</a>
+    </p>
+    <p class="pied__petit">© {annee} {infos.nom}. Prix nets, service compris.</p>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    align-items: end;
+    gap: var(--e-5);
+    padding: var(--e-6) var(--marge) calc(var(--e-5) + env(safe-area-inset-bottom));
+    color: var(--encre);
+    background: var(--pierre-ombre);
+  }
+
+  .pied__dessin {
+    width: min(100%, 22rem);
+    height: auto;
+  }
+
+  .pied__texte {
+    display: grid;
+    gap: var(--e-2);
+    font-size: var(--t-texte);
+  }
+
+  .pied__nom {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 1.6rem + 3vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .pied a {
+    text-decoration-color: var(--braise-texte);
+  }
+
+  .pied__petit {
+    margin-top: var(--e-3);
+    font-size: var(--t-petit);
+    color: var(--encre-douce);
+  }
+
+  @media (max-width: 48rem) {
+    .pied {
+      grid-template-columns: minmax(0, 1fr);
+      padding-bottom: calc(var(--e-5) + 5rem + env(safe-area-inset-bottom));
+    }
+
+    .pied__dessin {
+      width: 11rem;
+    }
+  }
+</style>

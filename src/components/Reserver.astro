@@ -1,0 +1,335 @@
+---
+import Horaires from './Horaires.astro';
+import Statut from './Statut.astro';
+import { infos } from '../data/infos';
+import { itineraire } from '../lib/liens';
+---
+
+<section class="reserver" id="reserver" aria-labelledby="t-reserver">
+  <div class="reserver__appel">
+    <h2 id="t-reserver" class="reserver__titre">Réserver</h2>
+    <p class="reserver__intro">Le plus simple, c'est d'appeler.</p>
+    <a class="reserver__tel chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a>
+    <p class="reserver__statut"><Statut /></p>
+  </div>
+
+  <form class="courriel" data-reservation novalidate>
+    <h3 class="courriel__titre">Ou par e-mail</h3>
+    <p class="courriel__aide">
+      Votre messagerie s'ouvre avec la demande déjà rédigée. Il ne reste qu'à l'envoyer.
+    </p>
+
+    <div class="champs">
+      <label class="champ champ--large">
+        <span>Nom</span>
+        <input name="nom" type="text" autocomplete="name" required />
+      </label>
+      <label class="champ">
+        <span>Date</span>
+        <input name="date" type="date" required data-date />
+      </label>
+      <label class="champ">
+        <span>Heure</span>
+        <input name="heure" type="time" step="900" required />
+      </label>
+      <label class="champ">
+        <span>Personnes</span>
+        <input name="couverts" type="number" inputmode="numeric" min="1" max="30" value="2" required />
+      </label>
+      <label class="champ">
+        <span>Téléphone <em>(facultatif)</em></span>
+        <input name="telephone" type="tel" autocomplete="tel" />
+      </label>
+      <label class="champ champ--large">
+        <span>Message <em>(facultatif)</em></span>
+        <textarea name="message" rows="3"></textarea>
+      </label>
+    </div>
+
+    <p class="courriel__alerte" data-alerte aria-live="polite"></p>
+
+    <button class="bouton bouton--braise" type="submit">Préparer l'e-mail</button>
+
+    <p class="courriel__secours" data-secours hidden>
+      Rien ne s'est ouvert ? Écrivez directement à <a href={`mailto:${infos.email}`}>{infos.email}</a>.
+    </p>
+  </form>
+
+  <div class="reserver__infos">
+    <div id="horaires" class="infos__bloc">
+      <h3 class="infos__titre">Horaires</h3>
+      <Horaires />
+    </div>
+    <div class="infos__bloc">
+      <h3 class="infos__titre">Adresse</h3>
+      <p class="infos__adresse">
+        {infos.adresse.rue}<br />
+        {`${infos.adresse.codePostal} ${infos.adresse.ville}`}
+      </p>
+      <p class="infos__liens">
+        <a href={itineraire.google}>Itinéraire Google Maps</a>
+        <a href={itineraire.apple}>Itinéraire Apple Plans</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { infos } from '../data/infos';
+  import { NOMS_JOURS, ouvertA, plagesFr } from '../lib/horaires';
+  import { jourIsoDeDate, lienMail } from '../lib/reservation';
+
+  const form = document.querySelector<HTMLFormElement>('[data-reservation]');
+  if (form) {
+    const alerte = form.querySelector<HTMLElement>('[data-alerte]')!;
+    const secours = form.querySelector<HTMLElement>('[data-secours]')!;
+    const date = form.querySelector<HTMLInputElement>('[data-date]')!;
+
+    // Pas de réservation dans le passé : aujourd'hui, à Paris.
+    const parisAujourdhui = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(new Date());
+    date.min = parisAujourdhui;
+
+    const verifier = () => {
+      const d = form.elements.namedItem('date') as HTMLInputElement;
+      const h = form.elements.namedItem('heure') as HTMLInputElement;
+      if (!d.value || !h.value) {
+        alerte.textContent = '';
+        return;
+      }
+      const jour = jourIsoDeDate(d.value);
+      alerte.textContent = ouvertA(jour, h.value, infos.horaires)
+        ? ''
+        : `Attention, le restaurant est fermé à cette heure-là. Le ${NOMS_JOURS[jour]} : ${plagesFr(infos.horaires[jour]).toLowerCase()}.`;
+    };
+    form.addEventListener('change', verifier);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      const champs = new FormData(form);
+      const texte = (cle: string) => String(champs.get(cle) ?? '');
+      window.location.href = lienMail(infos.email, {
+        nom: texte('nom'),
+        date: texte('date'),
+        heure: texte('heure'),
+        couverts: Number(texte('couverts')),
+        telephone: texte('telephone'),
+        message: texte('message'),
+      });
+      // Sans messagerie configurée, rien ne s'ouvre : on donne l'adresse.
+      setTimeout(() => (secours.hidden = false), 1500);
+    });
+  }
+</script>
+
+<style>
+  .reserver {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    grid-template-areas:
+      'appel courriel'
+      'infos courriel';
+    gap: var(--e-6) var(--e-6);
+    padding: var(--e-7) var(--marge) var(--e-6);
+    color: var(--pierre);
+    background: var(--nuit);
+  }
+
+  .reserver__appel {
+    grid-area: appel;
+  }
+
+  .reserver__titre {
+    font-size: var(--t-rubrique);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  .reserver__intro {
+    margin-top: var(--e-4);
+    color: var(--pierre-douce);
+    font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
+  }
+
+  .reserver__tel {
+    display: inline-block;
+    margin-top: var(--e-1);
+    font-family: var(--serif);
+    font-size: clamp(2.75rem, 1rem + 6.4vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--braise);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.4s var(--ease);
+  }
+
+  .reserver__tel:hover {
+    color: var(--braise-vive);
+  }
+
+  .reserver__statut {
+    margin-top: var(--e-3);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+  }
+
+  /* Formulaire */
+  .courriel {
+    grid-area: courriel;
+    align-self: start;
+    padding: var(--e-5) var(--e-4);
+    background: var(--nuit-profonde);
+  }
+
+  .courriel__titre {
+    font-size: var(--t-groupe);
+  }
+
+  .courriel__aide {
+    margin-top: var(--e-2);
+    max-width: 44ch;
+    font-size: var(--t-petit);
+    color: var(--pierre-douce);
+  }
+
+  .champs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--e-3) var(--e-3);
+    margin-top: var(--e-4);
+  }
+
+  .champ {
+    display: grid;
+    gap: 0.4rem;
+    font-size: var(--t-petit);
+    font-variation-settings: 'wght' 520;
+  }
+
+  .champ--large {
+    grid-column: 1 / -1;
+  }
+
+  .champ em {
+    font-style: normal;
+    color: var(--pierre-douce);
+    font-variation-settings: 'wght' 420;
+  }
+
+  .champ input,
+  .champ textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.65rem 0.1rem;
+    border: 0;
+    border-bottom: 1px solid var(--pierre-douce);
+    border-radius: 0;
+    font: inherit;
+    font-size: 1.0625rem;
+    font-variation-settings: 'wght' 450;
+    color: var(--pierre);
+    background: transparent;
+    color-scheme: dark;
+    transition: border-color 0.3s var(--ease);
+  }
+
+  .champ textarea {
+    resize: vertical;
+  }
+
+  .champ input:hover,
+  .champ textarea:hover {
+    border-bottom-color: var(--pierre);
+  }
+
+  .champ input:focus-visible,
+  .champ textarea:focus-visible {
+    outline: none;
+    border-bottom: 2px solid var(--braise);
+  }
+
+  .champ input:user-invalid {
+    border-bottom-color: var(--erreur);
+  }
+
+  .courriel__alerte {
+    min-height: 1.5em;
+    margin-block: var(--e-3) var(--e-2);
+    font-size: var(--t-petit);
+    color: var(--braise-vive);
+  }
+
+  .courriel__secours {
+    margin-top: var(--e-2);
+    font-size: var(--t-petit);
+    color: var(--pierre-douce);
+  }
+
+  .courriel__secours a {
+    color: var(--pierre);
+  }
+
+  /* Horaires et adresse */
+  .reserver__infos {
+    grid-area: infos;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--e-5);
+    align-items: start;
+  }
+
+  .infos__titre {
+    margin-bottom: var(--e-2);
+    font-size: var(--t-groupe);
+  }
+
+  .infos__adresse {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .infos__liens {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: var(--e-2);
+    font-size: var(--t-petit);
+  }
+
+  .infos__liens a {
+    color: var(--pierre-douce);
+    text-decoration-color: var(--braise);
+  }
+
+  .infos__liens a:hover {
+    color: var(--pierre);
+  }
+
+  @media (max-width: 64rem) {
+    .reserver {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'appel' 'courriel' 'infos';
+      gap: var(--e-5);
+      padding-block: var(--e-6) var(--e-5);
+    }
+
+    .courriel {
+      margin-inline: calc(-1 * var(--marge));
+      padding: var(--e-4) var(--marge);
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .reserver__infos {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .champs {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .champ:has([name='telephone']) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

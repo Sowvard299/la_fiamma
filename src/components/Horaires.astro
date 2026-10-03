@@ -1,0 +1,83 @@
+---
+import Flamme from './Flamme.astro';
+import { infos } from '../data/infos';
+import { NOMS_JOURS, plagesFr, type JourIso } from '../lib/horaires';
+
+const jours = [1, 2, 3, 4, 5, 6, 7] as JourIso[];
+---
+
+<table class="horaires">
+  <caption class="sr">Horaires d'ouverture</caption>
+  <tbody>
+    {
+      jours.map((j) => (
+        <tr data-jour={j} class:list={{ 'horaires--ferme': infos.horaires[j].length === 0 }}>
+          <th scope="row">
+            <Flamme class="horaires__flamme" />
+            {NOMS_JOURS[j]}
+          </th>
+          <td>{plagesFr(infos.horaires[j])}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+<script>
+  import { momentAParis } from '../lib/horaires';
+  // Le jour en cours, à Paris, est mis en avant.
+  const { jour } = momentAParis(new Date());
+  document.querySelector(`.horaires tr[data-jour="${jour}"]`)?.setAttribute('aria-current', 'date');
+</script>
+
+<style>
+  .horaires {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0.55rem 0;
+    text-align: left;
+    font-weight: inherit;
+    border-top: 1px solid var(--nuit-trait);
+  }
+
+  tr:last-child > * {
+    border-bottom: 1px solid var(--nuit-trait);
+  }
+
+  th {
+    width: 9rem;
+    text-transform: capitalize;
+    color: var(--pierre-douce);
+  }
+
+  td {
+    color: var(--pierre);
+  }
+
+  .horaires--ferme td {
+    color: var(--pierre-douce);
+  }
+
+  th :global(.horaires__flamme) {
+    height: 0.85em;
+    margin-right: 0.45em;
+    translate: 0 0.08em;
+    color: var(--braise);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+  }
+
+  tr[aria-current] th,
+  tr[aria-current] td {
+    color: var(--braise-vive);
+    font-variation-settings: 'wght' 600;
+  }
+
+  tr[aria-current] th :global(.horaires__flamme) {
+    opacity: 1;
+  }
+</style>
