@@ -263,8 +263,8 @@ export const sections: Section[] = [
       {
         titre: 'Bières',
         plats: [
-          { nom: 'Pression Leffe ou Peroni', volume: '25 cl', prix: 4.5 },
-          { nom: 'Pression Leffe ou Peroni', volume: '50 cl', prix: 8 },
+          { nom: 'Leffe ou Peroni', detail: 'Pression', volume: '25 cl', prix: 4.5 },
+          { nom: 'Leffe ou Peroni', detail: 'Pression', volume: '50 cl', prix: 8 },
           { nom: 'Chouffe', detail: 'Bouteille', volume: '33 cl', prix: 6 },
           { nom: 'IPA', detail: 'Bouteille', volume: '33 cl', prix: 7 },
         ],
@@ -281,7 +281,7 @@ export const sections: Section[] = [
         note: '100 % arabica',
         plats: [
           { nom: 'Expresso', prix: 2.5 },
-          { nom: 'Cappuccino ou double expresso', prix: 4.5 },
+          { nom: 'Cappuccino', detail: 'ou double expresso', prix: 4.5 },
           { nom: 'Thé', prix: 4.5 },
         ],
       },

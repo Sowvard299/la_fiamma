@@ -1,0 +1,123 @@
+---
+import Flamme from './Flamme.astro';
+import { prixFr, type Plat } from '../data/carte';
+
+interface Props {
+  plats: Plat[];
+  colonnes?: 1 | 2 | 3;
+  serre?: boolean;
+}
+const { plats, colonnes = 1, serre = false } = Astro.props;
+---
+
+<ul class:list={['plats', `plats--${colonnes}`, { 'plats--serre': serre }]}>
+  {
+    plats.map((p) => (
+      <li class="plat">
+        <span class="plat__nom">
+          {p.nom}
+          {p.maison && <Flamme class="plat__maison" titre="Porte le nom de la maison" />}
+          {p.volume && <span class="plat__volume">{p.volume}</span>}
+        </span>
+        <span class="plat__points" aria-hidden="true" />
+        <span class="plat__prix chiffres">
+          {p.supplement ? '+' : ''}
+          {prixFr(p.prix)}
+          <span class="sr"> euros</span>
+        </span>
+        {p.detail && <span class="plat__detail">{p.detail}</span>}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .plats {
+    display: grid;
+    gap: var(--e-3) var(--e-5);
+  }
+
+  .plats--serre {
+    gap: var(--e-2) var(--e-4);
+  }
+
+  @media (min-width: 46rem) {
+    .plats--2,
+    .plats--3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .plats--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .plat {
+    display: grid;
+    grid-template-columns: auto minmax(1.5rem, 1fr) auto;
+    align-items: baseline;
+    align-content: start;
+    column-gap: 0.5rem;
+  }
+
+  .plat__nom {
+    font-family: var(--serif);
+    font-size: var(--t-plat);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .plats--serre .plat__nom {
+    font-size: 1.125rem;
+  }
+
+  .plat__nom :global(.plat__maison) {
+    height: 0.8em;
+    margin-left: 0.3em;
+    translate: 0 0.05em;
+    color: var(--braise);
+  }
+
+  .plat__volume {
+    margin-left: 0.5em;
+    font-family: var(--sans);
+    font-size: var(--t-petit);
+    color: var(--encre-douce);
+    letter-spacing: 0;
+  }
+
+  /* Points de conduite, comme sur une carte imprimée. */
+  .plat__points {
+    align-self: end;
+    height: 0.3rem;
+    margin-bottom: 0.32em;
+    background: radial-gradient(circle, currentColor 0.07rem, transparent 0.09rem) left center / 0.45rem 0.3rem repeat-x;
+    opacity: 0.45;
+  }
+
+  .plat__prix {
+    font-size: 1.125rem;
+    font-variation-settings: 'wght' 600;
+    color: var(--braise-texte);
+  }
+
+  .plat__detail {
+    grid-column: 1 / 3;
+    max-width: 52ch;
+    margin-top: 0.15rem;
+    font-size: var(--t-petit);
+    line-height: 1.45;
+    color: var(--encre-douce);
+  }
+
+  :global(.sur-olive) .plat__prix {
+    color: var(--pierre);
+  }
+
+  :global(.sur-olive) .plat__detail,
+  :global(.sur-olive) .plat__volume {
+    color: var(--pierre-ombre);
+  }
+</style>

@@ -1,0 +1,197 @@
+---
+import { prixFr, vins } from '../data/carte';
+
+// « Verre 15 cl » → contenant et volume, empilables sur mobile.
+const entete = (c: string) => {
+  const m = c.match(/^(.*?)\s(\d.*)$/);
+  return m ? { contenant: m[1], volume: m[2] } : { contenant: c, volume: '' };
+};
+---
+
+<div class="vins">
+  <table class="vins__table">
+    <caption class="sr">Vins au verre et à la bouteille, prix en euros</caption>
+    <thead>
+      <tr>
+        <th scope="col"><span class="sr">Vin</span></th>
+        {
+          vins.colonnes.map((c) => (
+            <th scope="col">
+              {entete(c).contenant} <span class="vins__volume">{entete(c).volume}</span>
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    {
+      vins.regions.map((region) => (
+        <tbody>
+          <tr class="vins__region">
+            <th scope="colgroup" colspan={vins.colonnes.length + 1}>{region.titre}</th>
+          </tr>
+          {region.couleurs.map((couleur) =>
+            couleur.vins.map((vin, i) => (
+              <tr>
+                <th scope="row">
+                  <span class="vins__ligne">
+                    {i === 0 && <span class="vins__couleur">{couleur.titre}</span>}
+                    <span class="vins__nom">{vin.nom}</span>
+                  </span>
+                </th>
+                {vin.prix.map((p) => (
+                  <td class="chiffres">{prixFr(p)}</td>
+                ))}
+              </tr>
+            )),
+          )}
+        </tbody>
+      ))
+    }
+  </table>
+
+  <table class="vins__table vins__table--pichet">
+    <caption class="sr">Vin en pichet, prix en euros</caption>
+    <thead>
+      <tr>
+        <th scope="col">En pichet</th>
+        {
+          vins.pichet.colonnes.map((c) => (
+            <th scope="col">
+              {entete(c).contenant} <span class="vins__volume">{entete(c).volume}</span>
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        vins.pichet.vins.map((vin) => (
+          <tr>
+            <th scope="row">
+              <span class="vins__nom">{vin.nom}</span>
+            </th>
+            {vin.prix.map((p) => (
+              <td class="chiffres">{prixFr(p)}</td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .vins {
+    display: grid;
+    gap: var(--e-5);
+  }
+
+  .vins__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0.7rem 0;
+    text-align: left;
+    vertical-align: baseline;
+    font-weight: inherit;
+  }
+
+  thead th {
+    padding-top: 0;
+    font-size: var(--t-petit);
+    color: var(--encre-douce);
+    font-variation-settings: 'wght' 520;
+  }
+
+  thead th:first-child {
+    font-family: var(--serif);
+    font-size: var(--t-groupe);
+    color: var(--encre);
+  }
+
+  thead th:not(:first-child),
+  td {
+    width: 8.5rem;
+    text-align: right;
+  }
+
+  td {
+    font-size: 1.125rem;
+    font-variation-settings: 'wght' 600;
+    color: var(--braise-texte);
+  }
+
+  tbody tr + tr > *,
+  .vins__region + tr > * {
+    border-top: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
+  }
+
+  .vins__region th {
+    padding-top: var(--e-4);
+    font-family: var(--serif);
+    font-size: var(--t-groupe);
+    border-bottom: 1px solid var(--encre);
+  }
+
+  tbody:first-of-type .vins__region th {
+    padding-top: var(--e-2);
+  }
+
+  .vins__ligne {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--e-2);
+  }
+
+  .vins__couleur {
+    min-width: 5.5rem;
+    font-size: var(--t-petit);
+    color: var(--encre-douce);
+  }
+
+  tr:not(:has(.vins__couleur)) .vins__nom {
+    margin-left: calc(5.5rem + var(--e-2));
+  }
+
+  .vins__table--pichet .vins__nom {
+    margin-left: 0;
+  }
+
+  .vins__nom {
+    font-family: var(--serif);
+    font-size: var(--t-plat);
+  }
+
+  @media (max-width: 40rem) {
+    thead th:not(:first-child),
+    td {
+      width: 4.5rem;
+    }
+
+    thead th:not(:first-child) {
+      font-size: 0.8125rem;
+      line-height: 1.25;
+    }
+
+    .vins__volume {
+      display: block;
+    }
+
+    .vins__table--pichet thead th:first-child {
+      font-size: 1.25rem;
+    }
+
+    .vins__couleur {
+      min-width: 0;
+      flex-basis: 100%;
+    }
+
+    tr:not(:has(.vins__couleur)) .vins__nom {
+      margin-left: 0;
+    }
+  }
+</style>
