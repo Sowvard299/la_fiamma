@@ -50,6 +50,13 @@ import { itineraire } from '../lib/liens';
 
     <button class="bouton bouton--braise" type="submit">Préparer l'e-mail</button>
 
+    <noscript>
+      <p class="courriel__secours">
+        Ce formulaire a besoin de JavaScript. Écrivez directement à
+        <a href={`mailto:${infos.email}`}>{infos.email}</a>.
+      </p>
+    </noscript>
+
     <p class="courriel__secours" data-secours hidden>
       Rien ne s'est ouvert ? Écrivez directement à <a href={`mailto:${infos.email}`}>{infos.email}</a>.
     </p>
