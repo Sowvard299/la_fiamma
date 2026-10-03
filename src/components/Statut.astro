@@ -1,0 +1,49 @@
+---
+// Statut d'ouverture. Le texte par défaut sert sans JavaScript ; le script le remplace
+// par l'état réel, calculé en heure de Paris, puis le met à jour chaque minute.
+import Flamme from './Flamme.astro';
+---
+
+<span class="statut" data-statut>
+  <Flamme class="statut__flamme" />
+  <span data-statut-texte>Ouvert du lundi au vendredi midi et soir, le samedi soir</span>
+</span>
+
+<script>
+  import { infos } from '../data/infos';
+  import { libelleStatut, statut } from '../lib/horaires';
+
+  function mettreAJour() {
+    const s = statut(new Date(), infos.horaires);
+    for (const el of document.querySelectorAll<HTMLElement>('[data-statut]')) {
+      el.dataset.ouvert = String(s.ouvert);
+      el.querySelector('[data-statut-texte]')!.textContent = libelleStatut(s);
+    }
+  }
+
+  mettreAJour();
+  setInterval(mettreAJour, 60_000);
+</script>
+
+<style>
+  .statut {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55em;
+  }
+
+  .statut :global(.statut__flamme) {
+    height: 1.05em;
+    translate: 0 0.12em;
+    color: var(--pierre-douce);
+    opacity: 0.55;
+    transition:
+      color 0.6s var(--ease),
+      opacity 0.6s var(--ease);
+  }
+
+  .statut[data-ouvert='true'] :global(.statut__flamme) {
+    color: var(--braise);
+    opacity: 1;
+  }
+</style>
