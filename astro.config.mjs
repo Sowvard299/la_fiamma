@@ -6,4 +6,7 @@ export default defineConfig({
   site: process.env.SITE_URL ?? 'https://sowvard299.github.io',
   base: process.env.BASE_PATH ?? '/',
   trailingSlash: 'ignore',
+  // Sur Windows, « localhost » se résout en IPv6 (::1) : on écoute explicitement en IPv4,
+  // sinon les outils qui visent 127.0.0.1 (aperçu de l'app Claude, certains navigateurs) ne voient rien.
+  server: { host: '127.0.0.1' },
 });
