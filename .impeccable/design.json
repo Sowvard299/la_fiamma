@@ -1,37 +1,82 @@
 {
  "schemaVersion": 2,
- "generatedAt": "2026-10-03T13:36:31.944865+00:00",
+ "generatedAt": "2026-10-05T08:49:00.048651+00:00",
  "title": "Design System: La Fiamma",
  "extensions": {
   "colorMeta": {
+   "pierre": {
+    "role": "neutral",
+    "displayName": "Pierre",
+    "canonical": "oklch(92.6% 0.017 85)",
+    "tonalRamp": [
+     "#0f0b04",
+     "#2a261d",
+     "#49443b",
+     "#6b655b",
+     "#8e897e",
+     "#b3ada2",
+     "#d6d0c5",
+     "#f4eee2"
+    ]
+   },
+   "pierre-ombre": {
+    "role": "neutral",
+    "displayName": "Pierre ombrée",
+    "canonical": "oklch(87.3% 0.024 82)",
+    "tonalRamp": [
+     "#100a02",
+     "#2c2519",
+     "#4b4437",
+     "#6d6557",
+     "#908879",
+     "#b6ad9d",
+     "#d9d0c0",
+     "#f7eddd"
+    ]
+   },
+   "encre": {
+    "role": "neutral",
+    "displayName": "Encre",
+    "canonical": "oklch(26.6% 0.024 241)",
+    "tonalRamp": [
+     "#030c14",
+     "#1c2831",
+     "#3a4751",
+     "#5a6873",
+     "#7d8b96",
+     "#a1b0bc",
+     "#c4d3df",
+     "#e1f1fd"
+    ]
+   },
+   "encre-douce": {
+    "role": "neutral",
+    "displayName": "Encre douce",
+    "canonical": "oklch(46.4% 0.021 240)",
+    "tonalRamp": [
+     "#040c13",
+     "#1d2830",
+     "#3b474f",
+     "#5c6871",
+     "#7e8b95",
+     "#a3b0ba",
+     "#c5d3de",
+     "#e3f1fc"
+    ]
+   },
    "nuit": {
     "role": "primary",
     "displayName": "Nuit",
-    "canonical": "oklch(29.2% 0.034 241)",
+    "canonical": "oklch(24.8% 0.025 239)",
     "tonalRamp": [
-     "#000d18",
-     "#172935",
-     "#354856",
-     "#556978",
-     "#788c9c",
-     "#9cb1c2",
-     "#bed4e5",
-     "#dbf2ff"
-    ]
-   },
-   "nuit-profonde": {
-    "role": "neutral",
-    "displayName": "Nuit profonde",
-    "canonical": "oklch(24.4% 0.027 240)",
-    "tonalRamp": [
-     "#020c15",
-     "#1a2833",
-     "#384752",
-     "#586874",
-     "#7b8c98",
-     "#9fb1be",
-     "#c2d4e1",
-     "#dff1ff"
+     "#030c14",
+     "#1b2831",
+     "#394751",
+     "#596873",
+     "#7c8c97",
+     "#a0b1bc",
+     "#c3d4e0",
+     "#e0f1fe"
     ]
    },
    "braise": {
@@ -47,21 +92,6 @@
      "#e19e53",
      "#ffc278",
      "#ffdf95"
-    ]
-   },
-   "braise-vive": {
-    "role": "primary",
-    "displayName": "Braise vive",
-    "canonical": "oklch(76.0% 0.120 68)",
-    "tonalRamp": [
-     "#270000",
-     "#491200",
-     "#6d3400",
-     "#925600",
-     "#b87a2b",
-     "#e09f54",
-     "#ffc277",
-     "#ffe094"
     ]
    },
    "braise-texte": {
@@ -94,83 +124,38 @@
      "#edf4c3"
     ]
    },
-   "pierre": {
+   "ouvert": {
     "role": "neutral",
-    "displayName": "Pierre",
-    "canonical": "oklch(90.2% 0.019 86)",
+    "displayName": "Ouvert",
+    "canonical": "oklch(62.1% 0.121 147)",
     "tonalRamp": [
-     "#0f0b04",
-     "#2a261c",
-     "#49443a",
-     "#6b665a",
-     "#8e897d",
-     "#b3ada1",
-     "#d6d0c4",
-     "#f4eee1"
-    ]
-   },
-   "pierre-ombre": {
-    "role": "neutral",
-    "displayName": "Pierre ombrée",
-    "canonical": "oklch(84.4% 0.024 85)",
-    "tonalRamp": [
-     "#100a02",
-     "#2c2619",
-     "#4b4437",
-     "#6c6557",
-     "#908879",
-     "#b5ad9e",
-     "#d8d0c0",
-     "#f6eedd"
-    ]
-   },
-   "encre": {
-    "role": "neutral",
-    "displayName": "Encre",
-    "canonical": "oklch(27.8% 0.023 241)",
-    "tonalRamp": [
-     "#030c14",
-     "#1c2831",
-     "#3a4751",
-     "#5b6873",
-     "#7d8b96",
-     "#a1b0bc",
-     "#c4d3df",
-     "#e1f1fd"
-    ]
-   },
-   "encre-douce": {
-    "role": "neutral",
-    "displayName": "Encre douce",
-    "canonical": "oklch(44.4% 0.023 248)",
-    "tonalRamp": [
-     "#040c14",
-     "#1e2831",
-     "#3c4651",
-     "#5c6873",
-     "#7f8b97",
-     "#a3b0bc",
-     "#c6d3e0",
-     "#e3f0fe"
+     "#001500",
+     "#003400",
+     "#005518",
+     "#2c783a",
+     "#529d5d",
+     "#77c380",
+     "#9be7a3",
+     "#b8ffc0"
     ]
    }
   },
   "typographyMeta": {
-   "nom": {
-    "displayName": "Nom",
-    "purpose": "Le nom du restaurant dans le haut de page, rendu en WebGL."
+   "titre": {
+    "displayName": "Titre",
+    "purpose": "Titre du haut de page."
    },
-   "rubrique": {
-    "displayName": "Rubrique",
-    "purpose": "Titres de rubrique de la carte, en italien."
+   "section": {
+    "displayName": "Section",
+    "purpose": "Titres de section."
    },
    "groupe": {
     "displayName": "Groupe",
-    "purpose": "Sous-parties d'une rubrique (Rossa, Pour une personne)."
+    "purpose": "Sous-parties de rubrique."
    },
    "plat": {
     "displayName": "Plat",
-    "purpose": "Nom d'un plat sur une ligne de carte."
+    "purpose": "Noms de plats."
    },
    "texte": {
     "displayName": "Texte",
@@ -178,38 +163,53 @@
    },
    "petit": {
     "displayName": "Petit",
-    "purpose": "Ingrédients, notes, aides."
+    "purpose": "Ingrédients, notes."
    },
    "prix": {
     "displayName": "Prix",
-    "purpose": "Prix en chiffres tabulaires."
+    "purpose": "Prix tabulaires."
    }
   },
-  "shadows": [],
+  "shadows": [
+   {
+    "name": "objet-pose",
+    "value": "0 2.5rem 4rem -1.5rem rgb(27 39 48 / 0.45)",
+    "purpose": "Sous le disque de pizza, l'étiquette et le repère du plan."
+   }
+  ],
   "motion": [
    {
     "name": "ease",
     "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-    "purpose": "Ease-out exponentiel de toutes les transitions d'état."
+    "purpose": "Transitions d'état, arrivée de la scène."
    },
    {
-    "name": "chaleur",
-    "value": "WebGL, boucle requestAnimationFrame",
-    "purpose": "Seul mouvement continu : chaleur et braises du haut de page, coupé en mouvement réduit."
+    "name": "tourne",
+    "value": "rotate 55deg lié au défilement (animation-timeline: scroll())",
+    "purpose": "La pizza du haut de page tourne au défilement ; coupé en mouvement réduit."
+   },
+   {
+    "name": "defile",
+    "value": "translate -50% en 70 s, linéaire",
+    "purpose": "Bandeau des noms de pizzas ; arrêté en mouvement réduit."
    }
   ],
   "breakpoints": [
    {
     "name": "carte-une-colonne",
-    "value": "64rem"
+    "value": "56rem"
+   },
+   {
+    "name": "accueil-une-colonne",
+    "value": "52rem"
    },
    {
     "name": "barre-mobile",
     "value": "48rem"
    },
    {
-    "name": "etroit",
-    "value": "30rem"
+    "name": "entete-compact",
+    "value": "40rem"
    }
   ]
  },
@@ -218,89 +218,82 @@
    "name": "Bouton braise",
    "kind": "button",
    "refersTo": "bouton-braise",
-   "description": "Action principale : appeler, préparer l'e-mail.",
-   "html": "<a class=\"ds-bouton-braise\" href=\"#\">Appeler le 01 43 33 77 58</a>",
-   "css": ".ds-bouton-braise{display:inline-flex;align-items:center;min-height:3rem;padding:.7rem 1.4rem;border-radius:2px;background:#c8873a;color:#14222c;font:600 1rem 'Hanken Grotesk Variable',Arial,sans-serif;text-decoration:none;transition:background-color .35s cubic-bezier(.16,1,.3,1)}.ds-bouton-braise:hover{background:#e3a257}.ds-bouton-braise:focus-visible{outline:2px solid #c8873a;outline-offset:3px}"
+   "description": "Action principale : réserver une table.",
+   "html": "<a class=\"ds-b-braise\" href=\"#\">Réserver une table</a>",
+   "css": ".ds-b-braise{display:inline-flex;align-items:center;min-height:3rem;padding:.75rem 1.5rem;border-radius:2px;background:#c8873a;color:#0f181f;font:600 1rem 'Hanken Grotesk Variable',Arial,sans-serif;text-decoration:none;transition:background-color .35s cubic-bezier(.16,1,.3,1)}.ds-b-braise:hover{background:#e3a257}.ds-b-braise:focus-visible{outline:2px solid #c8873a;outline-offset:3px}"
+  },
+  {
+   "name": "Bouton ligne",
+   "kind": "button",
+   "refersTo": "bouton-ligne",
+   "description": "Action secondaire, se remplit d'encre au survol.",
+   "html": "<a class=\"ds-b-ligne\" href=\"#\">Voir la carte</a>",
+   "css": ".ds-b-ligne{display:inline-flex;align-items:center;min-height:3rem;padding:.75rem 1.5rem;border:1px solid #1b2730;border-radius:2px;color:#1b2730;font:600 1rem 'Hanken Grotesk Variable',Arial,sans-serif;text-decoration:none;transition:background-color .35s cubic-bezier(.16,1,.3,1),color .35s cubic-bezier(.16,1,.3,1)}.ds-b-ligne:hover{background:#1b2730;color:#ece6da}"
   },
   {
    "name": "Bouton nuit",
    "kind": "button",
    "refersTo": "bouton-nuit",
-   "description": "Action secondaire de la barre mobile.",
-   "html": "<a class=\"ds-bouton-nuit\" href=\"#\">Réserver</a>",
-   "css": ".ds-bouton-nuit{display:inline-flex;align-items:center;min-height:3rem;padding:.7rem 1.4rem;border-radius:2px;background:#1c2e3b;color:#e4ded1;font:600 1rem 'Hanken Grotesk Variable',Arial,sans-serif;text-decoration:none}.ds-bouton-nuit:hover{background:#14222c}.ds-bouton-nuit:focus-visible{outline:2px solid #c8873a;outline-offset:3px}"
+   "description": "Réserver dans l'en-tête et la barre mobile.",
+   "html": "<a class=\"ds-b-nuit\" href=\"#\">Réserver</a>",
+   "css": ".ds-b-nuit{display:inline-flex;align-items:center;min-height:3rem;padding:.75rem 1.5rem;border-radius:2px;background:#16232c;color:#ece6da;font:600 1rem 'Hanken Grotesk Variable',Arial,sans-serif;text-decoration:none}.ds-b-nuit:hover{background:#0f181f}"
   },
   {
-   "name": "Champ souligné",
-   "kind": "input",
-   "refersTo": "champ",
-   "description": "Champ de formulaire sur nuit profonde.",
-   "html": "<label class=\"ds-champ\"><span>Nom</span><input type=\"text\"></label>",
-   "css": ".ds-champ{display:grid;gap:.4rem;padding:1rem;background:#14222c;color:#e4ded1;font:520 .9375rem 'Hanken Grotesk Variable',Arial,sans-serif}.ds-champ input{min-height:3rem;padding:.65rem .1rem;border:0;border-bottom:1px solid #b9b4a8;border-radius:0;background:transparent;color:#e4ded1;font:inherit;font-size:1.0625rem}.ds-champ input:hover{border-bottom-color:#e4ded1}.ds-champ input:focus-visible{outline:none;border-bottom:2px solid #c8873a}"
-  },
-  {
-   "name": "Navigation",
+   "name": "Onglets de la carte",
    "kind": "nav",
-   "description": "Liens du haut de page, sur nuit.",
-   "html": "<nav class=\"ds-nav\"><a href=\"#\">Carte</a><a href=\"#\">Horaires</a><a class=\"ds-nav-reserver\" href=\"#\">Réserver</a></nav>",
-   "css": ".ds-nav{display:flex;gap:2.5rem;padding:1rem 1.5rem;background:#1c2e3b;color:#e4ded1;font:520 .9375rem 'Hanken Grotesk Variable',Arial,sans-serif}.ds-nav a{color:inherit;text-decoration:none;padding-block:.4rem;background:linear-gradient(currentColor,currentColor) left bottom/0 1px no-repeat;transition:background-size .45s cubic-bezier(.16,1,.3,1)}.ds-nav a:hover{background-size:100% 1px}.ds-nav .ds-nav-reserver{color:#c8873a}"
+   "description": "Rubriques en italien, onglet actif souligné de braise.",
+   "html": "<div class=\"ds-onglets\"><a aria-selected=\"true\" href=\"#\">Antipasti</a><a href=\"#\">Pizze</a><a href=\"#\">Vini</a></div>",
+   "css": ".ds-onglets{display:flex;gap:2rem;padding:0 1rem;background:#ece6da;border-block:1px solid #d3cab9}.ds-onglets a{padding:1rem 0 .9rem;font:500 1.3rem 'Bodoni Moda Variable',Georgia,serif;color:#4f5b64;text-decoration:none}.ds-onglets a[aria-selected=true]{color:#1b2730;box-shadow:inset 0 -2px 0 #c8873a}"
   },
   {
    "name": "Ligne de plat",
    "kind": "custom",
    "refersTo": "ligne-de-plat",
-   "description": "Une ligne de la carte : nom, points de conduite, prix, détail.",
-   "html": "<div class=\"ds-plat\"><span class=\"ds-plat-nom\">Margherita</span><span class=\"ds-plat-points\"></span><span class=\"ds-plat-prix\">13</span><span class=\"ds-plat-detail\">Mozzarella, basilic</span></div>",
-   "css": ".ds-plat{display:grid;grid-template-columns:auto minmax(1.5rem,1fr) auto;align-items:baseline;align-content:start;column-gap:.5rem;padding:1rem;background:#e4ded1;color:#1e2a33}.ds-plat-nom{font:400 1.3rem/1.2 'Young Serif',Georgia,serif;letter-spacing:-.01em}.ds-plat-points{align-self:end;height:.3rem;margin-bottom:.32em;background:radial-gradient(circle,currentColor .07rem,transparent .09rem) left center/.45rem .3rem repeat-x;opacity:.45}.ds-plat-prix{font:600 1.125rem 'Hanken Grotesk Variable',Arial,sans-serif;font-variant-numeric:tabular-nums;color:#7e5016}.ds-plat-detail{grid-column:1/3;margin-top:.15rem;font:420 .9375rem/1.45 'Hanken Grotesk Variable',Arial,sans-serif;color:#4a5560}"
+   "description": "Nom, points de conduite, prix, détail.",
+   "html": "<div class=\"ds-plat\"><span class=\"n\">Margherita</span><span class=\"p\"></span><span class=\"x\">13</span><span class=\"d\">Mozzarella, basilic</span></div>",
+   "css": ".ds-plat{display:grid;grid-template-columns:auto minmax(1.5rem,1fr) auto;align-items:baseline;column-gap:.5rem;padding:1rem;background:#ece6da;color:#1b2730}.ds-plat .n{font:500 1.25rem/1.2 'Bodoni Moda Variable',Georgia,serif}.ds-plat .p{align-self:end;height:.3rem;margin-bottom:.32em;background:radial-gradient(circle,currentColor .07rem,transparent .09rem) left center/.45rem .3rem repeat-x;opacity:.45}.ds-plat .x{font:600 1.125rem 'Hanken Grotesk Variable',Arial,sans-serif;font-variant-numeric:tabular-nums;color:#7e5016}.ds-plat .d{grid-column:1/3;font:420 .9375rem/1.45 'Hanken Grotesk Variable',Arial,sans-serif;color:#4f5b64}"
   },
   {
-   "name": "Bande pizza du mois",
+   "name": "Étiquette pizza du mois",
    "kind": "custom",
-   "description": "Région braise pleine : titre italien, nom géant, ingrédients, prix.",
-   "html": "<section class=\"ds-mois\"><h2>Pizza<br>del mese</h2><p class=\"ds-mois-nom\">Pepe</p><p>Base tomate, œuf, pepperoni, parmesan</p><p class=\"ds-mois-prix\">17 €</p></section>",
-   "css": ".ds-mois{padding:2.5rem;background:#c8873a;color:#14222c;font:480 1.125rem 'Hanken Grotesk Variable',Arial,sans-serif}.ds-mois h2{margin:0;font:400 3rem/.92 'Young Serif',Georgia,serif;letter-spacing:-.025em}.ds-mois-nom{margin:.5rem 0;font:400 6rem/.8 'Young Serif',Georgia,serif;letter-spacing:-.035em}.ds-mois-prix{font:400 2.5rem 'Young Serif',Georgia,serif}"
+   "description": "Étiquette braise posée sur la scène du haut de page.",
+   "html": "<a class=\"ds-etiquette\" href=\"#\"><span>Pizza du mois</span><b>Pepe, 17 €</b></a>",
+   "css": ".ds-etiquette{display:inline-grid;gap:.15rem;padding:.9rem 1.15rem;background:#c8873a;color:#0f181f;text-decoration:none;box-shadow:0 1rem 2rem -1rem rgb(27 39 48/.5)}.ds-etiquette span{font:650 .8125rem 'Hanken Grotesk Variable',Arial,sans-serif}.ds-etiquette b{font:500 1.375rem/1.1 'Bodoni Moda Variable',Georgia,serif}"
   }
  ],
  "narrative": {
-  "northStar": "Le feu, puis la carte à sa lumière",
-  "overview": "La page est un feu qu'on regarde de près, puis la carte qu'on lit à sa lumière. Tout part du logo : flamme ocre, bûches olive, olive bleu nuit, fond grège. Aucune photo : typographie, dessin du logo et un seul effet WebGL, la chaleur qui fait onduler le nom.\n\nChaque couleur possède une région entière : nuit, braise, pierre, olive, pierre ombrée. La carte se compose comme une carte imprimée. Rien n'est inventé.",
+  "northStar": "La trattoria du quartier, en grand format",
+  "overview": "Fond pierre clair, titres en Bodoni, grandes photos de plats et couleurs du logo en aplats. Le haut de page dit ce qu'on mange et où, montre une pizza entière en disque, et donne le statut d'ouverture, le téléphone et la note TheFork. Tout est factuel ; les photos d'illustration sont créditées.",
   "keyCharacteristics": [
-   "Palette tirée du logo, une région par couleur",
-   "Young Serif pour nommer, Hanken Grotesk pour lire et compter",
-   "Points de conduite et chiffres tabulaires",
-   "Un seul mouvement continu : la chaleur WebGL",
-   "Angles vifs, aucune ombre"
+   "Bodoni Moda pour nommer, Hanken Grotesk pour lire",
+   "Braise, olive et nuit en aplats",
+   "Carte en onglets avec une photo par rubrique",
+   "Notes d'avis vérifiées et datées",
+   "Aucune icône décorative"
   ],
   "rules": [
    {
-    "name": "La règle des régions",
-    "body": "Une couleur occupe une région entière ou n'apparaît pas. La seule lumière est celle du feu, dans le shader.",
+    "name": "Une couleur, une région",
+    "body": "Braise, olive et nuit occupent des blocs entiers.",
     "section": "colors"
    },
    {
-    "name": "La règle de lisibilité sur le feu",
-    "body": "Tout texte posé sur la lueur est en pierre pleine ; la lueur reste assez sombre pour garder 4,5:1.",
-    "section": "colors"
-   },
-   {
-    "name": "Pas d'eyebrow",
-    "body": "Aucun label en majuscules espacées au-dessus d'un titre ; la traduction vient après, jamais au-dessus.",
+    "name": "Pas d'eyebrow, pas d'icône",
+    "body": "Aucun label au-dessus d'un titre, aucune icône décorative (pas de flamme, pas d'emoji).",
     "section": "typography"
    }
   ],
   "dos": [
-   "Tirer toute nouvelle couleur du logo",
-   "N'écrire que des faits vérifiables",
-   "Titres de rubrique en italien avec lang=\"it\"",
-   "Chiffres tabulaires pour prix et horaires",
-   "Respecter prefers-reduced-motion"
+   "Lire les infos dans src/data/",
+   "Dater et sourcer les notes",
+   "Créditer les photos d'illustration",
+   "Chiffres tabulaires pour prix et horaires"
   ],
   "donts": [
-   "Inter, Playfair, Fraunces, Instrument Serif, Space Grotesk, Geist",
-   "Eyebrows, numérotation décorative, emoji, cartes à ombre, verre",
-   "Tirets cadratins dans les textes visibles",
-   "Photos de banque d'images, faux avis, histoire inventée",
-   "Texte braise sur papier"
+   "Icône flamme ou emoji",
+   "Faux avis ou photo de salle qui n'est pas la leur",
+   "Texte braise sur la pierre",
+   "Tiret cadratin"
   ]
  }
 }
