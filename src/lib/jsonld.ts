@@ -81,6 +81,11 @@ export function restaurantJsonLd({ infos, sections, vins, pizzaDuMois, url }: En
       addressLocality: infos.adresse.ville,
       addressCountry: 'FR',
     },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: infos.coordonnees.latitude,
+      longitude: infos.coordonnees.longitude,
+    },
     openingHoursSpecification: horaires,
     hasMenu: {
       '@type': 'Menu',

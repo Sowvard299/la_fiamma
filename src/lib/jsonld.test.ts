@@ -17,6 +17,10 @@ describe('restaurantJsonLd', () => {
     });
   });
 
+  it('situe le restaurant sur une carte', () => {
+    expect(ld.geo).toEqual({ '@type': 'GeoCoordinates', latitude: 48.8964005, longitude: 2.2460005 });
+  });
+
   it('donne le téléphone au format international', () => {
     expect(ld.telephone).toBe('+33143337758');
   });

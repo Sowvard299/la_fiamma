@@ -9,9 +9,11 @@ export const infos = {
   nom: 'La Fiamma',
   description: 'Pizzeria et cuisine italienne',
   adresse: { rue: '61 rue de Bitche', codePostal: '92400', ville: 'Courbevoie' },
+  // Position de la fiche Google du restaurant.
+  coordonnees: { latitude: 48.8964005, longitude: 2.2460005 },
   telephone: { affichage: '01 43 33 77 58', international: '+33143337758' },
   email: 'lafiamma92400@gmail.com',
-  // Horaires repris des annuaires (Mappy, PagesJaunes) : à confirmer avec le restaurant.
+  // Horaires identiques sur Mappy, PagesJaunes et la fiche Google du restaurant (octobre 2026).
   horaires: {
     1: midiEtSoir,
     2: midiEtSoir,
