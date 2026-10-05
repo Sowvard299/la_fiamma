@@ -35,9 +35,13 @@ npm run build    # site statique dans dist/
 
 ## Mise en ligne
 
-Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui teste, construit et publie sur GitHub Pages (`https://sowvard299.github.io/la_fiamma/`).
+Le fichier de déploiement automatique est rangé dans `docs/deploiement/deploy.yml` : GitHub refuse qu'un jeton sans le droit `workflow` envoie un fichier dans `.github/workflows/`. Pour l'activer, une seule fois :
 
-À faire une fois dans GitHub : **Settings → Pages → Source : GitHub Actions**. Sur un compte gratuit, GitHub Pages demande un dépôt public.
+1. Sur GitHub, dans le dépôt : **Add file → Create new file**, nommer le fichier `.github/workflows/deploy.yml`, coller le contenu de `docs/deploiement/deploy.yml`, puis **Commit changes**.
+2. **Settings → Pages → Source : GitHub Actions**. Sur un compte gratuit, GitHub Pages demande un dépôt public.
+3. En local, faire `git pull` pour récupérer le fichier.
+
+Ensuite, chaque push sur `main` teste, construit et publie le site sur `https://sowvard299.github.io/la_fiamma/`.
 
 ### Passer sur le domaine du restaurant
 
