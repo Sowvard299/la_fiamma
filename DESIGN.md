@@ -117,7 +117,7 @@ Aucune icône décorative : pas de flamme, pas d'emoji. Le nom « La Fiamma » �
 ### Primary
 
 - **Braise** `#c8873a` : actions principales (Réserver une table), étiquette de la pizza du mois, esperluette du titre, soulignés des liens forts, étoiles des avis. Jamais en texte sur la pierre : on passe alors à **Braise texte** `#7e5016` (prix de la carte, 5,6:1).
-- **Nuit** `#16232c` : bandeau défilant, section Réserver, bouton Réserver de l'en-tête.
+- **Nuit** `#16232c` : section Réserver, bouton Réserver de l'en-tête.
 
 ### Secondary
 

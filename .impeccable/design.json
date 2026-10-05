@@ -187,11 +187,6 @@
     "name": "tourne",
     "value": "rotate 55deg lié au défilement (animation-timeline: scroll())",
     "purpose": "La pizza du haut de page tourne au défilement ; coupé en mouvement réduit."
-   },
-   {
-    "name": "defile",
-    "value": "translate -50% en 70 s, linéaire",
-    "purpose": "Bandeau des noms de pizzas ; arrêté en mouvement réduit."
    }
   ],
   "breakpoints": [
