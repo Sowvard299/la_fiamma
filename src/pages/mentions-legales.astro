@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import Entete from '../components/Entete.astro';
+import PiedDePage from '../components/PiedDePage.astro';
+import { infos } from '../data/infos';
+import { photos } from '../data/photos';
+
+const accueil = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const { raisonSociale, formeJuridique, siret, directeurPublication } = infos.editeur;
+const adresse = `${infos.adresse.rue}, ${infos.adresse.codePostal} ${infos.adresse.ville}`;
+const credits = Object.values(photos);
+---
+
+<Base
+  titre="Mentions légales, La Fiamma"
+  description="Mentions légales et informations sur le site de La Fiamma, pizzeria à Courbevoie."
+  chemin="mentions-legales/"
+>
+  <Entete accueil={accueil} />
+  <main id="contenu" class="page conteneur">
+    <h1 class="titre-section">Mentions légales</h1>
+
+    <section>
+      <h2>Éditeur du site</h2>
+      <dl>
+        <dt>Établissement</dt>
+        <dd>{infos.nom}, {infos.description.toLowerCase()}</dd>
+        {
+          raisonSociale && (
+            <>
+              <dt>Raison sociale</dt>
+              <dd>{formeJuridique ? `${raisonSociale}, ${formeJuridique}` : raisonSociale}</dd>
+            </>
+          )
+        }
+        {
+          siret && (
+            <>
+              <dt>SIRET</dt>
+              <dd class="chiffres">{siret}</dd>
+            </>
+          )
+        }
+        <dt>Adresse</dt>
+        <dd>{adresse}</dd>
+        <dt>Téléphone</dt>
+        <dd><a class="chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a></dd>
+        <dt>E-mail</dt>
+        <dd><a href={`mailto:${infos.email}`}>{infos.email}</a></dd>
+        {
+          directeurPublication && (
+            <>
+              <dt>Directeur de la publication</dt>
+              <dd>{directeurPublication}</dd>
+            </>
+          )
+        }
+      </dl>
+    </section>
+
+    <section>
+      <h2>Hébergement</h2>
+      <p>GitHub Pages, service de GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+    </section>
+
+    <section>
+      <h2>Données personnelles et cookies</h2>
+      <p>
+        Ce site ne dépose aucun cookie et ne mesure pas l’audience. Le formulaire de réservation ne transmet rien :
+        il prépare un e-mail dans votre propre messagerie, que vous choisissez d’envoyer ou non.
+      </p>
+      <p>
+        Pour afficher les photos et le plan d’accès, votre navigateur contacte Unsplash (images.unsplash.com) et
+        OpenFreeMap (tiles.openfreemap.org), qui reçoivent votre adresse IP comme pour toute page web.
+      </p>
+    </section>
+
+    <section>
+      <h2>Crédits</h2>
+      <p>
+        Photos d’illustration, non contractuelles, sous licence Unsplash :
+        {
+          credits.map((c, i) => (
+            <>
+              <a href={c.page} rel="noopener">
+                {c.auteur}
+              </a>
+              {i < credits.length - 1 ? ', ' : '.'}
+            </>
+          ))
+        }
+      </p>
+      <p>
+        Plan : <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a>, données
+        <a href="https://www.openstreetmap.org/copyright" rel="noopener">© les contributeurs d’OpenStreetMap</a>.
+      </p>
+      <p>Polices Bodoni Moda et Hanken Grotesk, sous licence SIL Open Font License.</p>
+    </section>
+
+    <p class="page__retour"><a class="lien-fort" href={accueil}>Retour à l’accueil</a></p>
+  </main>
+  <PiedDePage accueil={accueil} />
+</Base>
+
+<style>
+  .page {
+    max-width: calc(48rem + 2 * var(--marge));
+    padding-block: var(--e-5) var(--e-6);
+  }
+
+  .page h1 {
+    margin-bottom: var(--e-5);
+  }
+
+  section + section {
+    margin-top: var(--e-5);
+  }
+
+  h2 {
+    margin-bottom: var(--e-2);
+    font-size: var(--t-groupe);
+  }
+
+  p + p {
+    margin-top: var(--e-2);
+  }
+
+  p {
+    max-width: 65ch;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+    gap: 0.6rem var(--e-3);
+  }
+
+  dt {
+    color: var(--encre-douce);
+  }
+
+  a {
+    text-decoration-color: var(--braise);
+  }
+
+  .page__retour {
+    margin-top: var(--e-6);
+  }
+
+  @media (max-width: 34rem) {
+    dl {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    dd {
+      margin-bottom: 0.75rem;
+    }
+  }
+</style>

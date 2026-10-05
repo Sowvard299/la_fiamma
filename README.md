@@ -2,7 +2,7 @@
 
 Site de La Fiamma, pizzeria et cuisine italienne au 61 rue de Bitche, 92400 Courbevoie.
 
-Une seule page : la carte complète en onglets, le statut d'ouverture en direct (heure de Paris), les notes Google et TheFork, un plan d'accès, et la réservation par téléphone ou par e-mail pré-rempli.
+Une page d'accueil : la carte complète en onglets avec recherche par plat ou ingrédient, le statut d'ouverture en direct (heure de Paris), les notes Google et TheFork, un plan d'accès, et la réservation par téléphone, sur TheFork ou par e-mail pré-rempli (heures proposées selon les horaires du jour choisi). Plus une page de mentions légales et une page 404.
 
 ## Modifier le contenu
 
@@ -17,6 +17,8 @@ Tout le contenu vit dans `src/data/`. Il n'y a rien d'autre à toucher.
 | téléphone, e-mail, adresse, position sur le plan | `src/data/infos.ts` | en haut du fichier |
 | les notes Google et TheFork | `src/data/avis.ts` | `sources` (et `releveLe`, la date du relevé) |
 | les photos | `src/data/photos.ts` | `id` de l'image et crédit |
+| le lien TheFork, la vente à emporter | `src/data/infos.ts` | `theFork`, `aEmporter` |
+| les mentions légales (raison sociale, SIRET, directeur de la publication) | `src/data/infos.ts` | `editeur` (un champ vide n'est pas affiché) |
 
 Les prix sont des nombres (`4.5` s'affiche « 4,50 »). Après une modification, `npm test` vérifie que la carte est cohérente (prix positifs, pas de pizza perdue, etc.).
 
@@ -53,7 +55,8 @@ Pour servir le site sur `lafiamma92.fr`, dans le workflow, remplacer `BASE_PATH:
 
 ## À confirmer avec le restaurant avant la mise en ligne
 
+- **Les mentions légales** (obligatoires en France) : raison sociale, SIRET et directeur de la publication, à remplir dans `editeur` (`src/data/infos.ts`). Piste relevée au registre du commerce, sans certitude (aucune enseigne déclarée) : FAMI, SAS, SIREN 944 650 902, siège au 61 rue de Bitche.
+- La vente à emporter, affichée d'après la fiche Google du restaurant.
 - Les photos : celles du site sont des photos d'illustration libres de droits, à remplacer par les leurs.
 - L'envie de montrer des avis clients en entier (le site n'affiche que les notes et renvoie vers Google et TheFork).
 - Les corrections faites sur la carte de l'ancien site : « 4 Formaggi », « Valpolicella DOC », « Côtes de Provence », « Get 27 ».
-- Les mentions légales (raison sociale, SIRET, hébergeur), obligatoires en France.

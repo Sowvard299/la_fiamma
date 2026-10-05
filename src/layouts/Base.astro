@@ -5,14 +5,26 @@ import { infos } from '../data/infos';
 import { pizzaDuMois, sections, vins } from '../data/carte';
 import { restaurantJsonLd } from '../lib/jsonld';
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const urlPage = new URL(`${base}/`, Astro.site).href;
-const urlImage = new URL(`${base}/og.png`, Astro.site).href;
+interface Props {
+  titre?: string;
+  description?: string;
+  /** Chemin de la page sans la base, par exemple "mentions-legales/". */
+  chemin?: string;
+  indexer?: boolean;
+}
 
-const titre = 'La Fiamma, pizzeria et cuisine italienne à Courbevoie';
-const description =
-  'Pizzas, pâtes et antipasti au 61 rue de Bitche, à Courbevoie. La carte complète, les horaires, et la réservation au 01 43 33 77 58.';
-const ld = restaurantJsonLd({ infos, sections, vins, pizzaDuMois, url: urlPage });
+const {
+  titre = 'La Fiamma, pizzeria et cuisine italienne à Courbevoie',
+  description = 'Pizzas, pâtes et antipasti au 61 rue de Bitche, à Courbevoie. La carte complète, les horaires, et la réservation au 01 43 33 77 58.',
+  chemin = '',
+  indexer = true,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const urlPage = new URL(`${base}/${chemin}`, Astro.site).href;
+const urlImage = new URL(`${base}/og.png`, Astro.site).href;
+const accueil = chemin === '';
+const ld = accueil ? restaurantJsonLd({ infos, sections, vins, pizzaDuMois, url: urlPage }) : null;
 ---
 
 <!doctype html>
@@ -23,6 +35,7 @@ const ld = restaurantJsonLd({ infos, sections, vins, pizzaDuMois, url: urlPage }
     <title>{titre}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={urlPage} />
+    {!indexer && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#ece6da" />
     <meta name="color-scheme" content="light" />
     <meta name="format-detection" content="telephone=no" />
@@ -44,9 +57,10 @@ const ld = restaurantJsonLd({ infos, sections, vins, pizzaDuMois, url: urlPage }
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    {ld && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
   </head>
   <body>
+    <a class="evitement" href="#contenu">Aller au contenu</a>
     <slot />
   </body>
 </html>

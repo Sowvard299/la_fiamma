@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Entete from '../components/Entete.astro';
+import { infos } from '../data/infos';
+
+const accueil = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<Base titre="Page introuvable, La Fiamma" chemin="404/" indexer={false}>
+  <Entete accueil={accueil} />
+  <main id="contenu" class="introuvable conteneur">
+    <h1 class="titre-section">Cette page n’existe pas.</h1>
+    <p>La carte, les horaires et la réservation sont sur la page d’accueil.</p>
+    <p class="introuvable__actions">
+      <a class="bouton bouton--braise" href={`${accueil}#carte`}>Voir la carte</a>
+      <a class="bouton bouton--ligne" href={`tel:${infos.telephone.international}`}>
+        <span>Appeler le <span class="chiffres">{infos.telephone.affichage}</span></span>
+      </a>
+    </p>
+  </main>
+</Base>
+
+<style>
+  .introuvable {
+    display: grid;
+    align-content: center;
+    gap: var(--e-3);
+    min-height: calc(100svh - var(--entete));
+    padding-block: var(--e-5);
+  }
+
+  .introuvable p {
+    color: var(--encre-douce);
+  }
+
+  .introuvable__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--e-2);
+  }
+</style>

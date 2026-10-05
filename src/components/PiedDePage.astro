@@ -1,9 +1,15 @@
 ---
 import { infos } from '../data/infos';
-import { photos } from '../data/photos';
+import { avis } from '../data/avis';
 
+interface Props {
+  /** Préfixe des ancres : vide sur l'accueil, l'adresse de l'accueil sur les autres pages. */
+  accueil?: string;
+}
+const { accueil = '' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const annee = new Date().getFullYear();
-const credits = Object.values(photos);
+const google = avis.sources.find((s) => s.nom === 'Google')!;
 ---
 
 <footer class="pied">
@@ -21,27 +27,20 @@ const credits = Object.values(photos);
     </div>
 
     <div class="pied__colonne">
-      <p><a href="#carte">La carte</a></p>
-      <p><a href="#avis">Avis</a></p>
-      <p><a href="#acces">Accès et horaires</a></p>
-      <p><a href="#reserver">Réserver</a></p>
+      <p><a href={`${accueil}#carte`}>La carte</a></p>
+      <p><a href={`${accueil}#avis`}>Avis</a></p>
+      <p><a href={`${accueil}#acces`}>Accès et horaires</a></p>
+      <p><a href={`${accueil}#reserver`}>Réserver</a></p>
     </div>
 
     <div class="pied__bas">
       <p>© {annee} {infos.nom}. Prix nets, service compris.</p>
-      <p>
-        Photos d’illustration, non contractuelles, sous licence Unsplash :
-        {
-          credits.map((c, i) => (
-            <>
-              <a href={c.page} rel="noopener">
-                {c.auteur}
-              </a>
-              {i < credits.length - 1 ? ', ' : '.'}
-            </>
-          ))
-        }
+      <p class="pied__liens">
+        <a href={`${base}/mentions-legales/`}>Mentions légales et crédits</a>
+        <a href={infos.theFork} rel="noopener">La Fiamma sur TheFork</a>
+        <a href={google.url} rel="noopener">La Fiamma sur Google</a>
       </p>
+      <p>Photos d’illustration, non contractuelles.</p>
     </div>
   </div>
 </footer>
@@ -83,6 +82,12 @@ const credits = Object.values(photos);
 
   .pied__colonne a:hover {
     text-decoration: underline;
+  }
+
+  .pied__liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem var(--e-3);
   }
 
   .pied__bas {

@@ -13,6 +13,19 @@ export const infos = {
   coordonnees: { latitude: 48.8964005, longitude: 2.2460005 },
   telephone: { affichage: '01 43 33 77 58', international: '+33143337758' },
   email: 'lafiamma92400@gmail.com',
+  // Réservation en ligne : le restaurant y affiche ses disponibilités.
+  theFork: 'https://www.thefork.fr/restaurant/la-fiamma-r849692',
+  // Indiqué sur la fiche Google du restaurant (« Vente à emporter ») : à confirmer.
+  aEmporter: true,
+  // Mentions légales. À remplir par le restaurant : tant qu'un champ est vide, il n'est pas affiché.
+  // Piste relevée au registre (à confirmer, aucune enseigne n'y est déclarée) :
+  // FAMI, SAS, SIREN 944 650 902, siège au 61 rue de Bitche, restauration traditionnelle.
+  editeur: {
+    raisonSociale: '',
+    formeJuridique: '',
+    siret: '',
+    directeurPublication: '',
+  },
   // Horaires identiques sur Mappy, PagesJaunes et la fiche Google du restaurant (octobre 2026).
   horaires: {
     1: midiEtSoir,

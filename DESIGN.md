@@ -182,6 +182,18 @@ Noms italiens en Bodoni ; l'onglet actif est souligné de braise. Les liens prof
 
 La pizza tourne lentement quand on fait défiler la page (animation liée au défilement, coupée en mouvement réduit). L'étiquette « Pizza du mois » est lue dans les données de la carte.
 
+### Navigation
+
+Sur ordinateur, le lien de la section en cours de lecture est souligné de braise. Sur mobile (sous 52 rem), un bouton texte « Menu » ouvre un panneau pierre plein écran : sections en Bodoni, téléphone et adresse ; il se ferme au clic sur un lien ou avec Échap. Un lien « Aller au contenu » apparaît au premier Tab.
+
+### Recherche dans la carte
+
+Champ souligné au-dessus des onglets. Dès deux lettres, les rubriques laissent place à la liste des plats trouvés (nom, ingrédients, sans accents), chacun avec un lien vers sa rubrique ; Échap, « Effacer » ou un onglet rendent la carte normale.
+
+### Réservation
+
+Trois voies, dans cet ordre : le téléphone en grand, TheFork en lien, l'e-mail pré-rempli. Le champ Heure est une liste des créneaux du jour choisi (toutes les 15 min, jusqu'à 30 min avant la fermeture, groupés Midi / Soir) ; un jour fermé le dit en clair.
+
 ### Plan d'accès
 
 MapLibre avec les tuiles libres OpenFreeMap, recolorées aux teintes du site ; repère « La Fiamma » en Bodoni sur fond nuit. Chargé seulement à l'approche de la section ; le défilement de la page n'est jamais capturé (Ctrl + molette ou deux doigts pour zoomer).

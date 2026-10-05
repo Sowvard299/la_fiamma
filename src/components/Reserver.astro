@@ -9,6 +9,21 @@ import { infos } from '../data/infos';
     <p class="reserver__intro">Le plus simple, c'est d'appeler.</p>
     <a class="reserver__tel chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a>
     <p class="reserver__statut"><Statut /></p>
+
+    <ul class="reserver__autres">
+      <li>
+        <span class="reserver__autres-titre">En ligne</span>
+        <a class="lien-fort" href={infos.theFork} rel="noopener">Réserver sur TheFork</a>
+      </li>
+      {
+        infos.aEmporter && (
+          <li>
+            <span class="reserver__autres-titre">À emporter</span>
+            <span>Commandez par téléphone.</span>
+          </li>
+        )
+      }
+    </ul>
   </div>
 
   <form class="courriel" data-reservation novalidate>
@@ -28,7 +43,9 @@ import { infos } from '../data/infos';
       </label>
       <label class="champ">
         <span>Heure</span>
-        <input name="heure" type="time" step="900" required />
+        <select name="heure" required disabled data-heure>
+          <option value="">Choisissez une date</option>
+        </select>
       </label>
       <label class="champ">
         <span>Personnes</span>
@@ -64,8 +81,9 @@ import { infos } from '../data/infos';
 
 <script>
   import { infos } from '../data/infos';
-  import { NOMS_JOURS, ouvertA, plagesFr } from '../lib/horaires';
+  import { NOMS_JOURS, heureFr } from '../lib/horaires';
   import { jourIsoDeDate, lienMail } from '../lib/reservation';
+  import { aujourdhuiAParis, creneaux } from '../lib/creneaux';
 
   const form = document.querySelector<HTMLFormElement>('[data-reservation]');
   if (form) {
@@ -73,23 +91,56 @@ import { infos } from '../data/infos';
     const secours = form.querySelector<HTMLElement>('[data-secours]')!;
     const date = form.querySelector<HTMLInputElement>('[data-date]')!;
 
-    // Pas de réservation dans le passé : aujourd'hui, à Paris.
-    const parisAujourdhui = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(new Date());
-    date.min = parisAujourdhui;
+    const heure = form.querySelector<HTMLSelectElement>('[data-heure]')!;
 
-    const verifier = () => {
-      const d = form.elements.namedItem('date') as HTMLInputElement;
-      const h = form.elements.namedItem('heure') as HTMLInputElement;
-      if (!d.value || !h.value) {
+    // Pas de réservation dans le passé : aujourd'hui, à Paris.
+    date.min = aujourdhuiAParis(new Date()).date;
+
+    // Les heures proposées suivent les horaires du jour choisi.
+    const remplirHeures = () => {
+      const avant = heure.value;
+      heure.replaceChildren();
+      const option = (valeur: string, texte: string) => {
+        const o = document.createElement('option');
+        o.value = valeur;
+        o.textContent = texte;
+        return o;
+      };
+      if (!date.value) {
+        heure.append(option('', 'Choisissez une date'));
+        heure.disabled = true;
         alerte.textContent = '';
         return;
       }
-      const jour = jourIsoDeDate(d.value);
-      alerte.textContent = ouvertA(jour, h.value, infos.horaires)
-        ? ''
-        : `Attention, le restaurant est fermé à cette heure-là. Le ${NOMS_JOURS[jour]} : ${plagesFr(infos.horaires[jour]).toLowerCase()}.`;
+      const liste = creneaux(date.value, infos.horaires, aujourdhuiAParis(new Date()));
+      if (liste.length === 0) {
+        const jour = jourIsoDeDate(date.value);
+        heure.append(option('', 'Aucun créneau'));
+        heure.disabled = true;
+        alerte.textContent =
+          infos.horaires[jour].length === 0
+            ? `Le restaurant est fermé le ${NOMS_JOURS[jour]}. Choisissez un autre jour.`
+            : 'Il n’y a plus de créneau aujourd’hui. Choisissez un autre jour, ou appelez-nous.';
+        return;
+      }
+      alerte.textContent = '';
+      heure.disabled = false;
+      heure.append(option('', 'Choisissez une heure'));
+      for (const [titre, filtre] of [
+        ['Midi', (h: string) => h < '17:00'],
+        ['Soir', (h: string) => h >= '17:00'],
+      ] as const) {
+        const service = liste.filter(filtre);
+        if (service.length === 0) continue;
+        const groupe = document.createElement('optgroup');
+        groupe.label = titre;
+        groupe.append(...service.map((h) => option(h, heureFr(h))));
+        heure.append(groupe);
+      }
+      if (liste.includes(avant)) heure.value = avant;
     };
-    form.addEventListener('change', verifier);
+    date.addEventListener('change', remplirHeures);
+    remplirHeures();
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -160,6 +211,53 @@ import { infos } from '../data/infos';
     font-size: 1.25rem;
   }
 
+  .reserver__autres {
+    display: grid;
+    gap: var(--e-2);
+    max-width: 30rem;
+    margin-top: var(--e-5);
+    padding-top: var(--e-3);
+    border-top: 1px solid var(--nuit-trait);
+  }
+
+  .reserver__autres li {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--e-2);
+  }
+
+  .reserver__autres-titre {
+    font-size: var(--t-petit);
+    color: var(--pierre-douce);
+  }
+
+  .reserver__autres a {
+    color: var(--pierre);
+  }
+
+  /* Liste d'heures : flèche dessinée, le reste suit les champs soulignés. */
+  .champ select {
+    padding-right: 1.75rem;
+    -webkit-appearance: none;
+    appearance: none;
+    background:
+      linear-gradient(45deg, transparent 50%, currentColor 50%) right 0.55rem center / 0.4rem 0.4rem no-repeat,
+      linear-gradient(-45deg, transparent 50%, currentColor 50%) right 0.15rem center / 0.4rem 0.4rem no-repeat;
+    cursor: pointer;
+  }
+
+  .champ select:disabled {
+    color: var(--pierre-douce);
+    cursor: not-allowed;
+  }
+
+  .champ select option,
+  .champ select optgroup {
+    color: var(--encre);
+    background: var(--pierre);
+  }
+
   /* Formulaire */
   .courriel {
     grid-area: courriel;
@@ -204,6 +302,7 @@ import { infos } from '../data/infos';
   }
 
   .champ input,
+  .champ select,
   .champ textarea {
     width: 100%;
     min-height: 3rem;
@@ -225,11 +324,13 @@ import { infos } from '../data/infos';
   }
 
   .champ input:hover,
+  .champ select:hover:not(:disabled),
   .champ textarea:hover {
     border-bottom-color: var(--pierre);
   }
 
   .champ input:focus-visible,
+  .champ select:focus-visible,
   .champ textarea:focus-visible {
     outline: none;
     border-bottom: 2px solid var(--braise);

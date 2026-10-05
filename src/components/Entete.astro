@@ -1,17 +1,71 @@
 ---
 // En-tête collant : transparent en haut de page, pierre pleine dès qu'on défile.
+// Sur mobile, un bouton « Menu » ouvre un panneau avec toutes les sections et le téléphone.
+import { infos } from '../data/infos';
+
+interface Props {
+  /** Préfixe des ancres : vide sur l'accueil, l'adresse de l'accueil sur les autres pages. */
+  accueil?: string;
+}
+const { accueil = '' } = Astro.props;
+
+const liens = [
+  { id: 'carte', libelle: 'La carte' },
+  { id: 'avis', libelle: 'Avis' },
+  { id: 'acces', libelle: 'Accès et horaires' },
+];
 ---
 
 <header class="entete" data-entete>
   <div class="entete__barre conteneur">
-    <a class="entete__marque" href="#haut">La Fiamma</a>
-    <nav aria-label="Navigation principale">
+    <a class="entete__marque" href={`${accueil}#haut`}>La Fiamma</a>
+
+    <nav class="entete__nav" aria-label="Navigation principale">
       <ul class="entete__liens">
-        <li><a href="#carte">La carte</a></li>
-        <li class="entete__large"><a href="#avis">Avis</a></li>
-        <li class="entete__large"><a href="#acces">Accès</a></li>
-        <li><a class="bouton bouton--nuit entete__reserver" href="#reserver">Réserver</a></li>
+        {
+          liens.map((l) => (
+            <li>
+              <a href={`${accueil}#${l.id}`} data-lien-section={l.id}>
+                {l.libelle}
+              </a>
+            </li>
+          ))
+        }
       </ul>
+    </nav>
+
+    <div class="entete__actions">
+      <a class="bouton bouton--nuit entete__reserver" href={`${accueil}#reserver`} data-lien-section="reserver">
+        Réserver
+      </a>
+      <button
+        class="entete__menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+        data-menu-bouton
+      >
+        <span data-menu-libelle>Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="panneau-menu" id="menu-mobile" data-menu hidden>
+    <nav class="conteneur" aria-label="Menu">
+      <ul class="panneau-menu__liens">
+        {
+          liens.map((l) => (
+            <li>
+              <a href={`${accueil}#${l.id}`}>{l.libelle}</a>
+            </li>
+          ))
+        }
+        <li><a href={`${accueil}#reserver`}>Réserver</a></li>
+      </ul>
+      <p class="panneau-menu__contact">
+        <a class="chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a>
+        <span>{`${infos.adresse.rue}, ${infos.adresse.ville}`}</span>
+      </p>
     </nav>
   </div>
 </header>
@@ -22,6 +76,58 @@
     const maj = () => (entete.dataset.defile = String(window.scrollY > 8));
     maj();
     window.addEventListener('scroll', maj, { passive: true });
+
+    // Menu mobile
+    const bouton = entete.querySelector<HTMLButtonElement>('[data-menu-bouton]')!;
+    const libelle = entete.querySelector<HTMLElement>('[data-menu-libelle]')!;
+    const menu = entete.querySelector<HTMLElement>('[data-menu]')!;
+
+    const basculer = (ouvrir: boolean) => {
+      menu.hidden = !ouvrir;
+      bouton.setAttribute('aria-expanded', String(ouvrir));
+      libelle.textContent = ouvrir ? 'Fermer' : 'Menu';
+      entete.dataset.menuOuvert = String(ouvrir);
+      document.documentElement.style.overflow = ouvrir ? 'hidden' : '';
+      if (ouvrir) menu.querySelector('a')?.focus();
+    };
+
+    bouton.addEventListener('click', () => basculer(bouton.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) basculer(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) {
+        basculer(false);
+        bouton.focus();
+      }
+    });
+    matchMedia('(min-width: 52.01rem)').addEventListener('change', (e) => {
+      if (e.matches) basculer(false);
+    });
+
+    // La section en cours de lecture est marquée dans la navigation.
+    const liens = [...entete.querySelectorAll<HTMLAnchorElement>('[data-lien-section]')];
+    const sections = liens
+      .map((l) => document.getElementById(l.dataset.lienSection!))
+      .filter((s): s is HTMLElement => s !== null);
+    if (sections.length) {
+      const visibles = new Set<string>();
+      const observateur = new IntersectionObserver(
+        (entrees) => {
+          for (const e of entrees) {
+            if (e.isIntersecting) visibles.add(e.target.id);
+            else visibles.delete(e.target.id);
+          }
+          const active = sections.find((s) => visibles.has(s.id))?.id;
+          for (const l of liens) {
+            if (l.dataset.lienSection === active) l.setAttribute('aria-current', 'location');
+            else l.removeAttribute('aria-current');
+          }
+        },
+        { rootMargin: '-35% 0px -60% 0px' },
+      );
+      sections.forEach((s) => observateur.observe(s));
+    }
   }
 </script>
 
@@ -36,7 +142,8 @@
       box-shadow 0.4s var(--ease);
   }
 
-  .entete[data-defile='true'] {
+  .entete[data-defile='true'],
+  .entete[data-menu-ouvert='true'] {
     background: var(--pierre);
     box-shadow: 0 1px 0 var(--trait);
   }
@@ -57,6 +164,10 @@
     text-decoration: none;
   }
 
+  .entete__nav {
+    margin-left: auto;
+  }
+
   .entete__liens {
     display: flex;
     align-items: center;
@@ -65,15 +176,27 @@
     font-variation-settings: 'wght' 520;
   }
 
-  .entete__liens a:not(.bouton) {
+  .entete__liens a {
     text-decoration: none;
     padding-block: 0.4rem;
     background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
     transition: background-size 0.45s var(--ease);
   }
 
-  .entete__liens a:not(.bouton):hover {
+  .entete__liens a:hover,
+  .entete__liens a[aria-current] {
     background-size: 100% 1px;
+  }
+
+  .entete__liens a[aria-current] {
+    background-image: linear-gradient(var(--braise), var(--braise));
+    background-size: 100% 2px;
+  }
+
+  .entete__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .entete__reserver {
@@ -81,13 +204,82 @@
     padding: 0.55rem 1.2rem;
   }
 
-  @media (max-width: 40rem) {
-    .entete__large {
+  .entete__menu {
+    display: none;
+    min-height: 2.75rem;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--encre);
+    border-radius: 2px;
+    font: inherit;
+    font-size: var(--t-petit);
+    font-variation-settings: 'wght' 600;
+    color: var(--encre);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .panneau-menu {
+    position: fixed;
+    inset: var(--entete) 0 0 0;
+    overflow-y: auto;
+    padding-block: var(--e-4);
+    background: var(--pierre);
+  }
+
+  .panneau-menu[hidden] {
+    display: none;
+  }
+
+  .panneau-menu__liens a {
+    display: block;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--trait);
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .panneau-menu__contact {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: var(--e-4);
+    color: var(--encre-douce);
+  }
+
+  .panneau-menu__contact a {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--braise-texte);
+    text-decoration: none;
+  }
+
+  @media (max-width: 52rem) {
+    .entete__nav {
       display: none;
     }
 
+    .entete__menu {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 22rem) {
     .entete__marque {
-      font-size: 1.375rem;
+      font-size: 1.25rem;
+    }
+
+    .entete__reserver {
+      padding-inline: 0.85rem;
+    }
+  }
+
+  @media (min-width: 52.01rem) {
+    .panneau-menu {
+      display: none !important;
     }
   }
 </style>
