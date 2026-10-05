@@ -1,5 +1,4 @@
 ---
-import Flamme from './Flamme.astro';
 import { prixFr, type Plat } from '../data/carte';
 
 interface Props {
@@ -16,7 +15,6 @@ const { plats, colonnes = 1, serre = false } = Astro.props;
       <li class="plat">
         <span class="plat__nom">
           {p.nom}
-          {p.maison && <Flamme class="plat__maison" titre="Porte le nom de la maison" />}
           {p.volume && <span class="plat__volume">{p.volume}</span>}
         </span>
         <span class="plat__points" aria-hidden="true" />
@@ -71,13 +69,6 @@ const { plats, colonnes = 1, serre = false } = Astro.props;
 
   .plats--serre .plat__nom {
     font-size: 1.125rem;
-  }
-
-  .plat__nom :global(.plat__maison) {
-    height: 0.8em;
-    margin-left: 0.3em;
-    translate: 0 0.05em;
-    color: var(--braise);
   }
 
   .plat__volume {

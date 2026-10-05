@@ -1,8 +1,6 @@
 ---
-import Horaires from './Horaires.astro';
 import Statut from './Statut.astro';
 import { infos } from '../data/infos';
-import { itineraire } from '../lib/liens';
 ---
 
 <section class="reserver" id="reserver" aria-labelledby="t-reserver">
@@ -62,23 +60,6 @@ import { itineraire } from '../lib/liens';
     </p>
   </form>
 
-  <div class="reserver__infos">
-    <div id="horaires" class="infos__bloc">
-      <h3 class="infos__titre">Horaires</h3>
-      <Horaires />
-    </div>
-    <div class="infos__bloc">
-      <h3 class="infos__titre">Adresse</h3>
-      <p class="infos__adresse">
-        {infos.adresse.rue}<br />
-        {`${infos.adresse.codePostal} ${infos.adresse.ville}`}
-      </p>
-      <p class="infos__liens">
-        <a href={itineraire.google}>Itinéraire Google Maps</a>
-        <a href={itineraire.apple}>Itinéraire Apple Plans</a>
-      </p>
-    </div>
-  </div>
 </section>
 
 <script>
@@ -133,11 +114,9 @@ import { itineraire } from '../lib/liens';
   .reserver {
     display: grid;
     grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    grid-template-areas:
-      'appel courriel'
-      'infos courriel';
-    gap: var(--e-6) var(--e-6);
-    padding: var(--e-7) var(--marge) var(--e-6);
+    grid-template-areas: 'appel courriel';
+    gap: var(--e-5) var(--e-6);
+    padding: var(--e-7) var(--marge);
     color: var(--pierre);
     background: var(--nuit);
   }
@@ -147,9 +126,9 @@ import { itineraire } from '../lib/liens';
   }
 
   .reserver__titre {
-    font-size: var(--t-rubrique);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+    font-size: var(--t-section);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
   }
 
   .reserver__intro {
@@ -277,45 +256,10 @@ import { itineraire } from '../lib/liens';
     color: var(--pierre);
   }
 
-  /* Horaires et adresse */
-  .reserver__infos {
-    grid-area: infos;
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: var(--e-5);
-    align-items: start;
-  }
-
-  .infos__titre {
-    margin-bottom: var(--e-2);
-    font-size: var(--t-groupe);
-  }
-
-  .infos__adresse {
-    font-size: 1.125rem;
-    line-height: 1.5;
-  }
-
-  .infos__liens {
-    display: grid;
-    gap: 0.35rem;
-    margin-top: var(--e-2);
-    font-size: var(--t-petit);
-  }
-
-  .infos__liens a {
-    color: var(--pierre-douce);
-    text-decoration-color: var(--braise);
-  }
-
-  .infos__liens a:hover {
-    color: var(--pierre);
-  }
-
   @media (max-width: 64rem) {
     .reserver {
       grid-template-columns: minmax(0, 1fr);
-      grid-template-areas: 'appel' 'courriel' 'infos';
+      grid-template-areas: 'appel' 'courriel';
       gap: var(--e-5);
       padding-block: var(--e-6) var(--e-5);
     }
@@ -327,10 +271,6 @@ import { itineraire } from '../lib/liens';
   }
 
   @media (max-width: 40rem) {
-    .reserver__infos {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
     .champs {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }

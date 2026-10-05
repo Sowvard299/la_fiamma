@@ -9,4 +9,6 @@ export default defineConfig({
   // Sur Windows, « localhost » se résout en IPv6 (::1) : on écoute explicitement en IPv4,
   // sinon les outils qui visent 127.0.0.1 (aperçu de l'app Claude, certains navigateurs) ne voient rien.
   server: { host: '127.0.0.1' },
+  // MapLibre (~800 Ko) n'est chargé qu'à l'approche du plan d'accès : un gros morceau assumé.
+  vite: { build: { chunkSizeWarningLimit: 1100 }, worker: { format: 'es' } },
 });

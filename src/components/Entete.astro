@@ -1,0 +1,93 @@
+---
+// En-tête collant : transparent en haut de page, pierre pleine dès qu'on défile.
+---
+
+<header class="entete" data-entete>
+  <div class="entete__barre conteneur">
+    <a class="entete__marque" href="#haut">La Fiamma</a>
+    <nav aria-label="Navigation principale">
+      <ul class="entete__liens">
+        <li><a href="#carte">La carte</a></li>
+        <li class="entete__large"><a href="#avis">Avis</a></li>
+        <li class="entete__large"><a href="#acces">Accès</a></li>
+        <li><a class="bouton bouton--nuit entete__reserver" href="#reserver">Réserver</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const entete = document.querySelector<HTMLElement>('[data-entete]');
+  if (entete) {
+    const maj = () => (entete.dataset.defile = String(window.scrollY > 8));
+    maj();
+    window.addEventListener('scroll', maj, { passive: true });
+  }
+</script>
+
+<style>
+  .entete {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: transparent;
+    transition:
+      background-color 0.4s var(--ease),
+      box-shadow 0.4s var(--ease);
+  }
+
+  .entete[data-defile='true'] {
+    background: var(--pierre);
+    box-shadow: 0 1px 0 var(--trait);
+  }
+
+  .entete__barre {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--e-3);
+    height: var(--entete);
+  }
+
+  .entete__marque {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .entete__liens {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.6vw, 2.25rem);
+    font-size: var(--t-petit);
+    font-variation-settings: 'wght' 520;
+  }
+
+  .entete__liens a:not(.bouton) {
+    text-decoration: none;
+    padding-block: 0.4rem;
+    background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
+    transition: background-size 0.45s var(--ease);
+  }
+
+  .entete__liens a:not(.bouton):hover {
+    background-size: 100% 1px;
+  }
+
+  .entete__reserver {
+    min-height: 2.75rem;
+    padding: 0.55rem 1.2rem;
+  }
+
+  @media (max-width: 40rem) {
+    .entete__large {
+      display: none;
+    }
+
+    .entete__marque {
+      font-size: 1.375rem;
+    }
+  }
+</style>

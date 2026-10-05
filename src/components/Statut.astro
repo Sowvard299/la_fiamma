@@ -1,12 +1,11 @@
 ---
 // Statut d'ouverture. Le texte par défaut sert sans JavaScript ; le script le remplace
 // par l'état réel, calculé en heure de Paris, puis le met à jour chaque minute.
-import Flamme from './Flamme.astro';
 ---
 
 <span class="statut" data-statut>
-  <Flamme class="statut__flamme" />
-  <span data-statut-texte>Ouvert du lundi au vendredi midi et soir, le samedi soir</span>
+  <span class="statut__pastille" aria-hidden="true"></span>
+  <span data-statut-texte>Ouvert du lundi au samedi</span>
 </span>
 
 <script>
@@ -28,22 +27,20 @@ import Flamme from './Flamme.astro';
 <style>
   .statut {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.55em;
   }
 
-  .statut :global(.statut__flamme) {
-    height: 1.05em;
-    translate: 0 0.12em;
-    color: var(--pierre-douce);
-    opacity: 0.55;
-    transition:
-      color 0.6s var(--ease),
-      opacity 0.6s var(--ease);
+  .statut__pastille {
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--pierre-douce);
   }
 
-  .statut[data-ouvert='true'] :global(.statut__flamme) {
-    color: var(--braise);
-    opacity: 1;
+  .statut[data-ouvert='true'] .statut__pastille {
+    background: var(--ouvert);
+    box-shadow: 0 0 0 0.25rem rgb(79 154 90 / 0.2);
   }
 </style>

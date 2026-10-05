@@ -1,44 +1,47 @@
 ---
 name: La Fiamma
-description: Pizzeria et cuisine italienne à Courbevoie. Un feu qu'on regarde de près, puis la carte qu'on lit à sa lumière.
+description: Pizzeria et cuisine italienne à Courbevoie. Une trattoria moderne, chaleureuse et lisible.
 colors:
-  nuit: "#1c2e3b"
-  nuit-profonde: "#14222c"
-  nuit-trait: "#34495a"
+  pierre: "#ece6da"
+  pierre-claire: "#f4efe6"
+  pierre-ombre: "#ddd4c4"
+  trait: "#d3cab9"
+  encre: "#1b2730"
+  encre-douce: "#4f5b64"
+  nuit: "#16232c"
+  nuit-profonde: "#0f181f"
+  nuit-trait: "#2c3b46"
+  pierre-douce: "#b9b2a5"
   braise: "#c8873a"
   braise-vive: "#e3a257"
   braise-texte: "#7e5016"
   olive: "#4d5226"
   olive-trait: "#6b7040"
-  pierre: "#e4ded1"
-  pierre-ombre: "#d3cbbb"
-  pierre-douce: "#b9b4a8"
-  encre: "#1e2a33"
-  encre-douce: "#4a5560"
+  ouvert: "#4f9a5a"
   erreur: "#e58a6f"
 typography:
-  nom:
-    fontFamily: "Young Serif, Iowan Old Style, Palatino Linotype, Georgia, serif"
-    fontSize: "min(calc((100cqi - 2 * var(--marge)) / 4.05), 44svh)"
-    fontWeight: 400
-    lineHeight: 0.88
+  titre:
+    fontFamily: "Bodoni Moda Variable, Bodoni 72, Didot, Georgia, serif"
+    fontSize: "clamp(3rem, 1.4rem + 5.2vw, 6.75rem)"
+    fontWeight: 500
+    lineHeight: 0.96
     letterSpacing: "-0.03em"
-  rubrique:
-    fontFamily: "Young Serif, Georgia, serif"
-    fontSize: "clamp(3rem, 1.4rem + 5.6vw, 6rem)"
-    fontWeight: 400
-    lineHeight: 0.95
-    letterSpacing: "-0.03em"
+  section:
+    fontFamily: "Bodoni Moda Variable, Georgia, serif"
+    fontSize: "clamp(2.75rem, 1.6rem + 4.4vw, 5.25rem)"
+    fontWeight: 500
+    lineHeight: 0.98
+    letterSpacing: "-0.025em"
   groupe:
-    fontFamily: "Young Serif, Georgia, serif"
+    fontFamily: "Bodoni Moda Variable, Georgia, serif"
     fontSize: "clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem)"
-    fontWeight: 400
+    fontWeight: 500
     lineHeight: 1.15
     letterSpacing: "-0.02em"
   plat:
-    fontFamily: "Young Serif, Georgia, serif"
-    fontSize: "clamp(1.1875rem, 1.05rem + 0.4vw, 1.375rem)"
-    fontWeight: 400
+    fontFamily: "Bodoni Moda Variable, Georgia, serif"
+    fontSize: "clamp(1.125rem, 1.02rem + 0.35vw, 1.3125rem)"
+    fontWeight: 500
     lineHeight: 1.2
     letterSpacing: "-0.01em"
   texte:
@@ -62,6 +65,7 @@ typography:
 rounded:
   vif: "2px"
   aucun: "0"
+  disque: "50%"
 spacing:
   e-1: "0.5rem"
   e-2: "1rem"
@@ -69,14 +73,15 @@ spacing:
   e-4: "2.5rem"
   e-5: "4rem"
   e-6: "6.5rem"
-  e-7: "10.5rem"
-  marge: "clamp(1rem, 4.5vw, 4rem)"
+  e-7: "9rem"
+  marge: "clamp(1.25rem, 5vw, 5rem)"
+  entete: "4.5rem"
 components:
   bouton-braise:
     backgroundColor: "{colors.braise}"
     textColor: "{colors.nuit-profonde}"
     rounded: "{rounded.vif}"
-    padding: "0.7rem 1.4rem"
+    padding: "0.75rem 1.5rem"
     height: "3rem"
   bouton-braise-hover:
     backgroundColor: "{colors.braise-vive}"
@@ -84,13 +89,13 @@ components:
     backgroundColor: "{colors.nuit}"
     textColor: "{colors.pierre}"
     rounded: "{rounded.vif}"
-    padding: "0.7rem 1.4rem"
+    padding: "0.75rem 1.5rem"
     height: "3rem"
-  champ:
+  bouton-ligne:
     backgroundColor: "transparent"
-    textColor: "{colors.pierre}"
-    rounded: "{rounded.aucun}"
-    padding: "0.65rem 0.1rem"
+    textColor: "{colors.encre}"
+    rounded: "{rounded.vif}"
+    padding: "0.75rem 1.5rem"
     height: "3rem"
   ligne-de-plat:
     textColor: "{colors.encre}"
@@ -101,111 +106,98 @@ components:
 
 ## Overview
 
-La page est un feu qu'on regarde de près, puis la carte qu'on lit à sa lumière. Tout part du logo du restaurant : une flamme ocre au-dessus de bûches vert olive, une olive bleu nuit, un lettrage serif sur fond grège. Il n'y a aucune photo. L'identité tient à la typographie, au dessin du logo vectorisé et à un seul effet WebGL : la chaleur qui fait onduler le nom au-dessus du feu.
+Une trattoria moderne : un fond pierre clair, des titres en Bodoni (le caractère italien né à Parme), de grandes photos de plats et les couleurs du logo posées en aplats francs. Le haut de page dit tout de suite ce qu'on mange et où (« Pizze, pasta & antipasti à Courbevoie »), montre une pizza entière découpée en disque, et donne les trois informations utiles : ouvert ou fermé maintenant, le téléphone, la note TheFork.
 
-Chaque couleur possède une région entière de la page au lieu de servir d'accent : la nuit (haut de page, réservation), la braise (bande de la pizza du mois), la pierre (la carte), l'olive (le bloc des pizzas blanches), la pierre ombrée (pied de page avec le dessin). Le visiteur passe du feu à la carte, puis revient à la nuit pour réserver.
+Le site reste factuel : chaque phrase est vérifiable. Les photos sont des photos d'illustration sous licence Unsplash, créditées et signalées comme telles dans le pied de page, en attendant les vraies.
 
-La carte se compose comme une carte imprimée : noms en serif, points de conduite, prix en chiffres tabulaires, ingrédients en petit. Rien n'est inventé : chaque phrase est un fait vérifiable sur le restaurant.
+Aucune icône décorative : pas de flamme, pas d'emoji. Le nom « La Fiamma » écrit en Bodoni tient lieu de logo dans l'en-tête ; le favicon est un « F » en Bodoni sur bleu nuit.
 
 ## Colors
 
 ### Primary
 
-- **Nuit** `#1c2e3b` : le bleu du lettrage du logo. Fond du haut de page et de la réservation. Jamais remplacée par un noir.
-- **Braise** `#c8873a` : la flamme du logo. Bande de la pizza du mois, boutons d'action, téléphone, flamme de l'index. Sur papier, elle n'est jamais du texte : on passe à **Braise texte** `#7e5016` (5,1:1 sur pierre).
+- **Braise** `#c8873a` : actions principales (Réserver une table), étiquette de la pizza du mois, esperluette du titre, soulignés des liens forts, étoiles des avis. Jamais en texte sur la pierre : on passe alors à **Braise texte** `#7e5016` (prix de la carte, 5,6:1).
+- **Nuit** `#16232c` : bandeau défilant, section Réserver, bouton Réserver de l'en-tête.
 
 ### Secondary
 
-- **Olive** `#4d5226` : les bûches et la branche. Porte le bloc des pizzas blanches, en texte pierre.
+- **Olive** `#4d5226` : l'aplat derrière la pizza du haut de page, le bloc des pizzas blanches, toute la section Avis.
 
 ### Neutral
 
-- **Pierre** `#e4ded1` : le fond grège du logo, éclairci. Le papier de la carte.
-- **Pierre ombrée** `#d3cbbb` : le pied de page, sous l'illustration en couleurs.
-- **Encre** `#1e2a33` et **encre douce** `#4a5560` : texte et détails sur papier (10,9:1 et 5,7:1).
-- **Pierre douce** `#b9b4a8` : texte secondaire sur nuit (6,8:1).
-- **Nuit profonde** `#14222c` : surface du formulaire, texte des boutons braise.
+- **Pierre** `#ece6da` : le fond de la page. **Pierre ombrée** `#ddd4c4` : le pied de page. **Trait** `#d3cab9` : filets.
+- **Encre** `#1b2730` et **encre douce** `#4f5b64` : texte et texte secondaire.
+- **Ouvert** `#4f9a5a` : la pastille du statut quand le restaurant est ouvert ; grise sinon.
 
 ### Named Rules
 
-**La règle des régions.** Une couleur occupe une région entière ou n'apparaît pas. Pas de dégradé décoratif, pas de lueur colorée autour des éléments : la seule lumière de la page est celle du feu, dans le shader.
-
-**La règle de lisibilité sur le feu.** Tout texte posé sur la lueur du haut de page est en pierre pleine. La lueur reste assez sombre et rouge pour garder 4,5:1.
+**Une couleur, une région.** Braise, olive et nuit occupent des blocs entiers (étiquette, aplat, section) au lieu de se disperser en accents.
 
 ## Typography
 
-**Young Serif** pour tout ce qui se nomme : le nom, les rubriques, les groupes, les plats, le téléphone, le statut. **Hanken Grotesk** (variable) pour tout ce qui se lit ou se compte : ingrédients, prix, horaires, formulaire, navigation. Les deux polices sont auto-hébergées.
+**Bodoni Moda** (variable, axe de taille optique) pour tout ce qui se nomme : titres, rubriques, plats, notes, téléphone, nom du restaurant. **Hanken Grotesk** (variable) pour tout ce qui se lit et se compte : textes, ingrédients, prix, horaires, formulaires. Les deux polices sont auto-hébergées.
 
 ### Hierarchy
 
-- **Nom** : « Fiamma » remplit exactement la largeur utile (4,04 em avec un tracking de -0,03 em par ligne). « La » mesure 0,34 fois cette taille.
-- **Rubrique** : 3 à 6 rem, interligne 0,95. Titres en italien (`lang="it"`), traduction française alignée à droite sur la même ligne de base.
-- **Groupe** : 1,375 à 1,75 rem. La note éventuelle (« Base tomate ») suit en Hanken petit.
-- **Plat** : 1,19 à 1,375 rem. Prix en Hanken 600, chiffres tabulaires.
-- **Texte** : 17 px, interligne 1,55. **Petit** : 15 px.
+- **Titre** de la page : 3 à 6,75 rem, interligne 0,96.
+- **Section** (La carte, Ce qu'en disent nos clients, Nous trouver, Réserver) : 2,75 à 5,25 rem.
+- **Rubrique** de la carte : 2,25 à 3,75 rem, soulignée d'un filet encre ; traduction française alignée à droite.
+- **Plat** : 1,125 à 1,31 rem, points de conduite, prix en chiffres tabulaires.
 
 ### Named Rules
 
-**Pas d'eyebrow.** Aucun petit label en majuscules espacées au-dessus d'un titre. La traduction d'une rubrique vient après, jamais au-dessus.
+**Pas d'eyebrow, pas d'icône.** Aucun petit label au-dessus d'un titre, aucune icône décorative. Les seuls signes graphiques sont la pastille de statut et les étoiles des notes.
 
 ## Layout
 
-- Une seule page : feu → pizza du mois → carte → réserver → pied de page.
-- Marge latérale fluide `clamp(1rem, 4.5vw, 4rem)`, largeur de lecture maximale 82 rem.
-- Rythme vertical sur une base de 8 px. Les rubriques sont séparées de 10,5 rem, et l'espace au-dessus d'un titre est toujours plus grand que l'espace en dessous.
-- La carte varie de densité selon la rubrique : deux groupes côte à côte (antipasti, pâtes, desserts), liste en deux colonnes (salades, pizzas), trois colonnes serrées (bar), vrai tableau (vins).
-- Sous 64 rem, l'index devient une barre horizontale collante. Sous 48 rem, une barre « Appeler / Réserver » apparaît en bas une fois le haut de page quitté.
+- En-tête collant (4,5 rem), transparent en haut de page, pierre pleine avec un filet dès qu'on défile.
+- Haut de page en deux colonnes : texte à gauche, scène à droite (aplat olive, disque de pizza, verre, étiquette braise). Sur mobile, la scène passe au-dessus du texte.
+- La carte est en onglets collants sous l'en-tête. Chaque rubrique : photo à gauche (collante sur ordinateur), plats à droite. Sans JavaScript, toutes les rubriques s'affichent l'une sous l'autre.
+- Rythme vertical sur une base de 8 px ; sections espacées de 9 rem.
+- Sous 48 rem, une barre « Appeler / Réserver » apparaît en bas une fois le haut de page quitté.
 
 ## Elevation & Depth
 
-Aucune ombre. La profondeur vient des aplats de couleur et de la lumière du feu, rendue dans le shader. Les séparations sont des filets de 1 px teintés (encre à 14-18 %, ou `nuit-trait` sur fond nuit).
+Une seule ombre, douce et décalée vers le bas, sous les objets posés de la scène (disque, étiquette) et le repère du plan. Partout ailleurs, la profondeur vient des aplats.
 
 ## Shapes
 
-Angles vifs : 2 px pour les boutons, 0 pour les champs, les blocs et les bandes. Les seules formes organiques sont celles du logo vectorisé.
+Angles vifs (2 px) pour les boutons, 0 pour les blocs et les photos. Une seule forme ronde : le disque de la pizza, parce que la pizza est ronde.
 
 ## Components
 
 ### Buttons
 
-- **Braise** : fond braise, texte nuit profonde, Hanken 600, hauteur minimale 3 rem. Au survol, il passe en braise vive. C'est l'action principale (appeler, envoyer).
-- **Nuit** : fond nuit, texte pierre. Action secondaire de la barre mobile.
-- **Lien fort** : texte souligné braise de 2 px (« Voir la carte », « Réserver une table »).
-
-### Inputs / Fields
-
-Champs soulignés sur nuit profonde : pas de cadre, filet pierre douce de 1 px, qui devient braise de 2 px au focus et passe en couleur `erreur` sur saisie invalide (`:user-invalid`). Libellé visible au-dessus ; « (facultatif) » en pierre douce.
+- **Braise** : action principale. **Nuit** : Réserver dans l'en-tête, barre mobile. **Ligne** : action secondaire (Voir la carte), qui se remplit d'encre au survol.
 
 ### Navigation
 
-Flamme du logo à gauche (lien vers le haut), trois liens à droite. « Réserver » est en braise. Au survol, un soulignement de 1 px se déroule de gauche à droite.
+Nom en Bodoni à gauche, trois liens et un bouton nuit à droite. Sur mobile : nom, « La carte » et le bouton.
 
-### Ligne de plat (signature)
+### Onglets de la carte (signature)
 
-Nom en serif, points de conduite, prix aligné à droite, détail en dessous. Sur l'olive, les prix et le texte passent en pierre. Les plats qui portent le nom de la maison reçoivent la flamme du logo.
+Noms italiens en Bodoni ; l'onglet actif est souligné de braise. Les liens profonds (`#carte-pizze`) ouvrent la bonne rubrique ; flèches, Début et Fin au clavier.
 
-### Index de la carte (signature)
+### Scène du haut de page (signature)
 
-Liste des rubriques, collante. La flamme glisse devant la rubrique en cours (ease-out exponentiel, 0,6 s). Sur mobile, c'est une barre qui défile seule jusqu'à la rubrique active, soulignée de braise.
+La pizza tourne lentement quand on fait défiler la page (animation liée au défilement, coupée en mouvement réduit). L'étiquette « Pizza du mois » est lue dans les données de la carte.
 
-### Chaleur (signature)
+### Plan d'accès
 
-Canvas WebGL plein haut de page. Le nom y est redessiné à la position exacte du `h1`, puis déformé par un bruit qui monte, plus fort près du bas et autour du pointeur. Des braises s'élèvent et s'éteignent avant le haut de l'écran. L'effet faiblit quand on fait défiler la page, s'arrête hors écran ou quand l'onglet est caché, devient une image fixe en mouvement réduit, et disparaît au profit du texte normal sans WebGL.
+MapLibre avec les tuiles libres OpenFreeMap, recolorées aux teintes du site ; repère « La Fiamma » en Bodoni sur fond nuit. Chargé seulement à l'approche de la section ; le défilement de la page n'est jamais capturé (Ctrl + molette ou deux doigts pour zoomer).
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** tirer toute nouvelle couleur du logo, et lui donner une région entière.
-- **Do** écrire les faits du restaurant et rien d'autre ; les horaires et la carte viennent de `src/data/`.
-- **Do** garder les titres de rubrique en italien avec `lang="it"`, la traduction française à côté.
-- **Do** utiliser des chiffres tabulaires pour tout prix ou horaire.
-- **Do** respecter `prefers-reduced-motion` pour toute animation continue.
+- **Do** lire toute information du restaurant dans `src/data/` (carte, horaires, avis, photos).
+- **Do** dater les notes d'avis et citer leur source.
+- **Do** créditer chaque photo d'illustration et la signaler comme telle.
+- **Do** utiliser des chiffres tabulaires pour les prix et les horaires.
 
 ### Don't:
 
-- **Don't** utiliser Inter, Playfair, Fraunces, Instrument Serif, Space Grotesk ou Geist.
-- **Don't** ajouter d'eyebrow, de numérotation décorative, d'emoji, de cartes à ombre ou d'effet de verre.
+- **Don't** ajouter d'icône flamme ou d'emoji.
+- **Don't** inventer d'histoire, de faux avis ou de photo de salle qui ne serait pas la leur.
+- **Don't** mettre de texte braise sur la pierre.
 - **Don't** écrire de tiret cadratin dans les textes visibles.
-- **Don't** ajouter de photo de banque d'images, de faux avis, de note chiffrée ou d'histoire de la maison.
-- **Don't** mettre de texte braise sur le papier : utiliser braise texte.

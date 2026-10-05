@@ -1,0 +1,262 @@
+---
+import Statut from './Statut.astro';
+import { infos } from '../data/infos';
+import { pizzaDuMois, prixFr } from '../data/carte';
+import { avis, noteFr } from '../data/avis';
+import { photos, srcPhoto, srcsetPhoto } from '../data/photos';
+
+const thefork = avis.sources.find((s) => s.nom === 'TheFork')!;
+---
+
+<section class="accueil conteneur" id="haut" aria-labelledby="accueil-titre">
+  <div class="accueil__texte">
+    <h1 id="accueil-titre" class="accueil__titre">
+      Pizze, pasta <span class="accueil__esperluette">&amp;</span> antipasti à Courbevoie
+    </h1>
+    <p class="accueil__sous">
+      {infos.nom}, pizzeria et cuisine italienne au {infos.adresse.rue}. Midi et soir du lundi au vendredi,
+      le samedi soir.
+    </p>
+    <p class="accueil__actions">
+      <a class="bouton bouton--braise" href="#reserver">Réserver une table</a>
+      <a class="bouton bouton--ligne" href="#carte">Voir la carte</a>
+    </p>
+    <dl class="accueil__infos">
+      <div>
+        <dt><Statut /></dt>
+        <dd><a href="#horaires">Tous les horaires</a></dd>
+      </div>
+      <div>
+        <dt><a class="chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a></dt>
+        <dd>Réservation par téléphone</dd>
+      </div>
+      <div>
+        <dt><a href="#avis">{noteFr(thefork.note)} / {thefork.sur}</a></dt>
+        <dd>sur TheFork, {thefork.nombre} avis</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="scene">
+    <div class="scene__bloc"></div>
+    <div class="scene__disque">
+      <img
+        src={srcPhoto(photos.disque, 900, 900)}
+        srcset={srcsetPhoto(photos.disque, [520, 760, 1040, 1400], 1)}
+        sizes="(max-width: 52rem) 86vw, 44vw"
+        alt=""
+        width="900"
+        height="900"
+        fetchpriority="high"
+      />
+    </div>
+    <img
+      class="scene__verre"
+      src={srcPhoto(photos.spritz, 420, 560)}
+      srcset={srcsetPhoto(photos.spritz, [300, 420, 600], 0.75)}
+      sizes="(max-width: 52rem) 30vw, 14vw"
+      alt=""
+      width="420"
+      height="560"
+    />
+    <a class="etiquette" href="#carte-pizze">
+      <span class="etiquette__titre">Pizza du mois</span>
+      <span class="etiquette__nom">{pizzaDuMois.nom}, <span class="chiffres">{prixFr(pizzaDuMois.prix)}</span> €</span>
+    </a>
+  </div>
+
+</section>
+
+<style>
+  .accueil {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-areas: 'texte scene';
+    align-items: center;
+    gap: var(--e-4) clamp(2rem, 5vw, 5rem);
+    min-height: calc(100svh - var(--entete));
+    padding-block: var(--e-3) var(--e-6);
+  }
+
+  .accueil__texte {
+    grid-area: texte;
+  }
+
+  .accueil__titre {
+    font-size: clamp(3rem, 1.4rem + 5.2vw, 6.75rem);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+  }
+
+  .accueil__esperluette {
+    color: var(--braise);
+  }
+
+  .accueil__sous {
+    max-width: 36ch;
+    margin-top: var(--e-3);
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--encre-douce);
+  }
+
+  .accueil__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-1) 0.75rem;
+    margin-top: var(--e-4);
+  }
+
+  .accueil__infos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-2) var(--e-4);
+    margin-top: var(--e-4);
+    padding-top: var(--e-3);
+    border-top: 1px solid var(--trait);
+    font-size: var(--t-petit);
+    line-height: 1.4;
+  }
+
+  .accueil__infos dt {
+    font-variation-settings: 'wght' 600;
+  }
+
+  .accueil__infos dt a {
+    text-decoration: none;
+  }
+
+  .accueil__infos dt a:hover {
+    text-decoration: underline;
+  }
+
+  .accueil__infos dd {
+    color: var(--encre-douce);
+  }
+
+  /* La scène : la pizza, un aplat olive, un verre. La pizza tourne quand on défile. */
+  .scene {
+    grid-area: scene;
+    position: relative;
+    width: 100%;
+    max-width: 44rem;
+    aspect-ratio: 1;
+    justify-self: center;
+  }
+
+  .scene__bloc {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 46%;
+    aspect-ratio: 1;
+    background: var(--olive);
+  }
+
+  .scene__disque {
+    position: absolute;
+    inset: 6% 9% 9% 3%;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--nuit);
+    box-shadow: 0 2.5rem 4rem -1.5rem rgb(27 39 48 / 0.45);
+    animation: arrivee 1.4s var(--ease) both;
+  }
+
+  .scene__disque img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scale: 1.05;
+  }
+
+  .scene__verre {
+    position: absolute;
+    right: 1%;
+    bottom: 0;
+    width: 29%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 0.5rem solid var(--pierre);
+    animation: arrivee 1.4s 0.15s var(--ease) both;
+  }
+
+  .etiquette {
+    position: absolute;
+    z-index: 2;
+    left: -2%;
+    bottom: 13%;
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.9rem 1.15rem;
+    background: var(--braise);
+    color: var(--nuit-profonde);
+    text-decoration: none;
+    box-shadow: 0 1rem 2rem -1rem rgb(27 39 48 / 0.5);
+    transition: translate 0.4s var(--ease);
+    animation: arrivee 1.4s 0.3s var(--ease) both;
+  }
+
+  .etiquette:hover {
+    translate: 0 -3px;
+  }
+
+  .etiquette__titre {
+    font-size: 0.8125rem;
+    font-variation-settings: 'wght' 650;
+  }
+
+  .etiquette__nom {
+    font-family: var(--serif);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  @keyframes arrivee {
+    from {
+      opacity: 0;
+      translate: 0 1.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .scene__disque img {
+        animation: tourne linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 120vh;
+      }
+
+      @keyframes tourne {
+        to {
+          rotate: 55deg;
+        }
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene__disque,
+    .scene__verre,
+    .etiquette {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 52rem) {
+    .accueil {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'scene' 'texte';
+      min-height: 0;
+      padding-block: var(--e-1) var(--e-5);
+    }
+
+    .scene {
+      max-width: 26rem;
+    }
+
+  }
+</style>

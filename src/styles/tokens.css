@@ -1,21 +1,24 @@
 :root {
-  /* Couleurs tirées du logo. Chaque couleur possède une région de la page. */
-  --nuit: #1c2e3b;
-  --nuit-profonde: #14222c;
-  --nuit-trait: #34495a;
+  /* Les couleurs du logo de La Fiamma, sur un fond pierre clair. */
+  --pierre: #ece6da;
+  --pierre-claire: #f4efe6;
+  --pierre-ombre: #ddd4c4;
+  --trait: #d3cab9;
+  --encre: #1b2730;
+  --encre-douce: #4f5b64;
+  --nuit: #16232c;
+  --nuit-profonde: #0f181f;
+  --nuit-trait: #2c3b46;
+  --pierre-douce: #b9b2a5;
   --braise: #c8873a;
   --braise-vive: #e3a257;
   --braise-texte: #7e5016;
   --olive: #4d5226;
   --olive-trait: #6b7040;
-  --pierre: #e4ded1;
-  --pierre-ombre: #d3cbbb;
-  --pierre-douce: #b9b4a8;
-  --encre: #1e2a33;
-  --encre-douce: #4a5560;
+  --ouvert: #4f9a5a;
   --erreur: #e58a6f;
 
-  --serif: 'Young Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --serif: 'Bodoni Moda Variable', 'Bodoni 72', 'Didot', Georgia, serif;
   --sans: 'Hanken Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
 
   /* Rythme : base 8 px. */
@@ -25,15 +28,16 @@
   --e-4: 2.5rem;
   --e-5: 4rem;
   --e-6: 6.5rem;
-  --e-7: 10.5rem;
-  --marge: clamp(1rem, 4.5vw, 4rem);
-  --largeur: 82rem;
+  --e-7: 9rem;
+  --marge: clamp(1.25rem, 5vw, 5rem);
+  --largeur: 86rem;
+  --entete: 4.5rem;
 
   --t-texte: 1.0625rem;
   --t-petit: 0.9375rem;
-  --t-plat: clamp(1.1875rem, 1.05rem + 0.4vw, 1.375rem);
+  --t-plat: clamp(1.125rem, 1.02rem + 0.35vw, 1.3125rem);
   --t-groupe: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
-  --t-rubrique: clamp(3rem, 1.4rem + 5.6vw, 6rem);
+  --t-section: clamp(2.75rem, 1.6rem + 4.4vw, 5.25rem);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }

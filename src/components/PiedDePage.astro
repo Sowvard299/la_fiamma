@@ -1,81 +1,114 @@
 ---
-import illustration from '../assets/logo-illustration.svg?url';
 import { infos } from '../data/infos';
+import { photos } from '../data/photos';
 
 const annee = new Date().getFullYear();
+const credits = Object.values(photos);
 ---
 
 <footer class="pied">
-  <img
-    class="pied__dessin"
-    src={illustration}
-    width="1440"
-    height="1440"
-    alt="Le logo de La Fiamma : une flamme sur des bûches, une branche d'olivier"
-    loading="lazy"
-    decoding="async"
-  />
-  <div class="pied__texte">
+  <div class="pied__grille conteneur">
     <p class="pied__nom">{infos.nom}</p>
-    <p>
-      {infos.description}<br />
-      {`${infos.adresse.rue}, ${infos.adresse.codePostal} ${infos.adresse.ville}`}
-    </p>
-    <p>
-      <a class="chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a><br />
-      <a href={`mailto:${infos.email}`}>{infos.email}</a>
-    </p>
-    <p class="pied__petit">© {annee} {infos.nom}. Prix nets, service compris.</p>
+
+    <div class="pied__colonne">
+      <p>{infos.description}</p>
+      <p>{`${infos.adresse.rue}, ${infos.adresse.codePostal} ${infos.adresse.ville}`}</p>
+    </div>
+
+    <div class="pied__colonne">
+      <p><a class="chiffres" href={`tel:${infos.telephone.international}`}>{infos.telephone.affichage}</a></p>
+      <p><a href={`mailto:${infos.email}`}>{infos.email}</a></p>
+    </div>
+
+    <div class="pied__colonne">
+      <p><a href="#carte">La carte</a></p>
+      <p><a href="#avis">Avis</a></p>
+      <p><a href="#acces">Accès et horaires</a></p>
+      <p><a href="#reserver">Réserver</a></p>
+    </div>
+
+    <div class="pied__bas">
+      <p>© {annee} {infos.nom}. Prix nets, service compris.</p>
+      <p>
+        Photos d’illustration, non contractuelles, sous licence Unsplash :
+        {
+          credits.map((c, i) => (
+            <>
+              <a href={c.page} rel="noopener">
+                {c.auteur}
+              </a>
+              {i < credits.length - 1 ? ', ' : '.'}
+            </>
+          ))
+        }
+      </p>
+    </div>
   </div>
 </footer>
 
 <style>
   .pied {
-    display: grid;
-    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-    align-items: end;
-    gap: var(--e-5);
-    padding: var(--e-6) var(--marge) calc(var(--e-5) + env(safe-area-inset-bottom));
-    color: var(--encre);
+    padding-block: var(--e-6) calc(var(--e-4) + env(safe-area-inset-bottom));
     background: var(--pierre-ombre);
+    font-size: var(--t-petit);
   }
 
-  .pied__dessin {
-    width: min(100%, 22rem);
-    height: auto;
-  }
-
-  .pied__texte {
+  .pied__grille {
     display: grid;
-    gap: var(--e-2);
-    font-size: var(--t-texte);
+    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+    gap: var(--e-4);
   }
 
   .pied__nom {
     font-family: var(--serif);
-    font-size: clamp(2.5rem, 1.6rem + 3vw, 4.5rem);
-    line-height: 1;
+    font-size: clamp(2.5rem, 1.8rem + 2.6vw, 4.25rem);
+    font-weight: 500;
+    line-height: 0.95;
     letter-spacing: -0.03em;
+  }
+
+  .pied__colonne {
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
   }
 
   .pied a {
     text-decoration-color: var(--braise-texte);
   }
 
-  .pied__petit {
-    margin-top: var(--e-3);
-    font-size: var(--t-petit);
+  .pied__colonne a {
+    text-decoration: none;
+  }
+
+  .pied__colonne a:hover {
+    text-decoration: underline;
+  }
+
+  .pied__bas {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 0.35rem;
+    margin-top: var(--e-4);
+    padding-top: var(--e-3);
+    border-top: 1px solid var(--trait);
     color: var(--encre-douce);
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 56rem) {
+    .pied__grille {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pied__nom {
+      grid-column: 1 / -1;
+    }
   }
 
   @media (max-width: 48rem) {
     .pied {
-      grid-template-columns: minmax(0, 1fr);
-      padding-bottom: calc(var(--e-5) + 5rem + env(safe-area-inset-bottom));
-    }
-
-    .pied__dessin {
-      width: 11rem;
+      padding-bottom: calc(var(--e-4) + 5rem + env(safe-area-inset-bottom));
     }
   }
 </style>

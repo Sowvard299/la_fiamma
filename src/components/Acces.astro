@@ -1,0 +1,144 @@
+---
+import Horaires from './Horaires.astro';
+import { infos } from '../data/infos';
+import { itineraire } from '../lib/liens';
+---
+
+<section class="acces" id="acces" aria-labelledby="acces-titre">
+  <div class="acces__grille conteneur">
+    <div class="acces__plan" data-plan role="region" aria-label={`Plan : ${infos.adresse.rue}, ${infos.adresse.ville}`}>
+      <p class="acces__repli">
+        {infos.adresse.rue}, {infos.adresse.codePostal}
+        {infos.adresse.ville}
+        <a class="lien-fort" href={itineraire.google}>Ouvrir dans Google Maps</a>
+      </p>
+    </div>
+
+    <div class="acces__infos">
+      <h2 id="acces-titre" class="titre-section">Nous trouver</h2>
+      <p class="acces__adresse">
+        {infos.adresse.rue}<br />
+        {`${infos.adresse.codePostal} ${infos.adresse.ville}`}
+      </p>
+      <p class="acces__itineraires">
+        <a class="lien-fort" href={itineraire.google}>Itinéraire Google Maps</a>
+        <a class="lien-fort" href={itineraire.apple}>Itinéraire Apple Plans</a>
+      </p>
+
+      <div id="horaires" class="acces__horaires">
+        <h3>Horaires</h3>
+        <Horaires />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { infos } from '../data/infos';
+  import { preparerPlan } from '../scripts/plan';
+  const plan = document.querySelector<HTMLElement>('[data-plan]');
+  if (plan) preparerPlan(plan, { ...infos.coordonnees, nom: infos.nom });
+</script>
+
+<style>
+  .acces {
+    padding-block: var(--e-7);
+  }
+
+  .acces__grille {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--e-5) clamp(2rem, 5vw, 5.5rem);
+    align-items: start;
+  }
+
+  .acces__plan {
+    position: relative;
+    min-height: 30rem;
+    height: 100%;
+    background: var(--pierre-ombre);
+  }
+
+  .acces__repli {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    gap: var(--e-1);
+    padding: var(--e-4);
+    text-align: center;
+    color: var(--encre-douce);
+  }
+
+  .acces__plan[data-charge] .acces__repli {
+    display: none;
+  }
+
+  .acces__adresse {
+    margin-top: var(--e-4);
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .acces__itineraires {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-1) var(--e-3);
+    margin-top: var(--e-3);
+    font-size: var(--t-petit);
+  }
+
+  .acces__horaires {
+    margin-top: var(--e-5);
+  }
+
+  .acces__horaires h3 {
+    margin-bottom: var(--e-2);
+    font-size: var(--t-groupe);
+  }
+
+  /* Repère du restaurant sur le plan */
+  :global(.plan-repere) {
+    position: relative;
+    padding: 0.55rem 0.9rem 0.6rem;
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--pierre);
+    background: var(--nuit);
+    box-shadow: 0 0.75rem 1.5rem -0.75rem rgb(15 24 31 / 0.6);
+    translate: 0 -0.6rem;
+  }
+
+  :global(.plan-repere)::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    border: 0.45rem solid transparent;
+    border-top-color: var(--nuit);
+    translate: -50% 0;
+  }
+
+  :global(.acces__plan .maplibregl-ctrl-group) {
+    border-radius: 2px;
+    box-shadow: none;
+    border: 1px solid var(--trait);
+  }
+
+  @media (max-width: 56rem) {
+    .acces__grille {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .acces__plan {
+      order: 2;
+      min-height: 22rem;
+      margin-inline: calc(-1 * var(--marge));
+    }
+  }
+</style>

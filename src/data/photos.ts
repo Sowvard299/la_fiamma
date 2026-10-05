@@ -15,10 +15,10 @@ export interface Photo {
 
 export const photos = {
   disque: {
-    id: '1627461985459-51600559fffe',
-    alt: 'Une pizza entière vue de dessus, mozzarella et basilic',
-    auteur: 'georgia z',
-    page: 'https://unsplash.com/photos/JG5lgvc57qE',
+    id: '1593560708920-61dd98c46a4e',
+    alt: 'Une pizza entière vue de dessus, roquette et mozzarella',
+    auteur: 'Saundarya Srinivasan',
+    page: 'https://unsplash.com/photos/60nzTP7_hMQ',
   },
   spritz: {
     id: '1725541592916-83dc6c458b53',

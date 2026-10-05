@@ -1,0 +1,164 @@
+---
+import { avis, noteFr } from '../data/avis';
+
+const [annee, mois, jour] = avis.releveLe.split('-').map(Number);
+const releve = new Date(Date.UTC(annee, mois - 1, jour)).toLocaleDateString('fr-FR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+// Étoiles remplies à proportion de la note (4,8 / 5 → 96 %).
+const remplissage = (note: number, sur: number) => `${Math.round((note / sur) * 100)}%`;
+---
+
+<section class="avis" id="avis" aria-labelledby="avis-titre">
+  <div class="avis__grille conteneur">
+    <header class="avis__tete">
+      <h2 id="avis-titre" class="titre-section">Ce qu’en disent nos clients</h2>
+      <p class="avis__releve">Notes publiques relevées le {releve}.</p>
+    </header>
+
+    <ul class="avis__notes">
+      {
+        avis.sources.map((s) => (
+          <li class="note">
+            <p class="note__chiffre">
+              <span class="chiffres">{noteFr(s.note)}</span>
+              <span class="note__sur"> / {s.sur}</span>
+            </p>
+            <p class="etoiles" style={`--remplissage: ${remplissage(s.note, s.sur)}`}>
+              <span class="sr">
+                {noteFr(s.note)} sur {s.sur}
+              </span>
+            </p>
+            <p class="note__source">
+              {s.nom}, {s.nombre} avis
+            </p>
+            <p class="note__precision">{s.precision}.</p>
+            {s.details && (
+              <dl class="note__details">
+                {s.details.map((d) => (
+                  <div>
+                    <dt>{d.libelle}</dt>
+                    <dd class="chiffres">{noteFr(d.note)}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <a class="note__lien lien-fort" href={s.url} rel="noopener">
+              Lire les avis sur {s.nom}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .avis {
+    padding-block: var(--e-7);
+    color: var(--pierre);
+    background: var(--olive);
+  }
+
+  .avis__grille {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--e-5) clamp(2rem, 5vw, 5.5rem);
+    align-items: start;
+  }
+
+  .avis__releve {
+    margin-top: var(--e-3);
+    font-size: var(--t-petit);
+    color: var(--pierre-ombre);
+  }
+
+  .avis__notes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--e-4);
+  }
+
+  .note {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-top: var(--e-3);
+    border-top: 1px solid var(--olive-trait);
+  }
+
+  .note__chiffre {
+    font-family: var(--serif);
+    font-size: clamp(4.5rem, 3rem + 5vw, 7.5rem);
+    font-weight: 500;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+  }
+
+  .note__sur {
+    font-size: 0.32em;
+    letter-spacing: 0;
+    color: var(--pierre-ombre);
+  }
+
+  /* Cinq étoiles dessinées, remplies en braise jusqu'à la note. */
+  .etoiles {
+    --etoile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.2l-5.9 3.3 1.3-6.6-4.9-4.5 6.6-.8z'/%3E%3C/svg%3E");
+    width: 7.5rem;
+    height: 1.25rem;
+    background: linear-gradient(90deg, var(--braise) var(--remplissage), var(--olive-trait) 0);
+    -webkit-mask: var(--etoile) left center / 1.5rem 1.25rem repeat-x;
+    mask: var(--etoile) left center / 1.5rem 1.25rem repeat-x;
+  }
+
+  .note__source {
+    margin-top: var(--e-1);
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .note__precision {
+    font-size: var(--t-petit);
+    color: var(--pierre-ombre);
+  }
+
+  .note__details {
+    display: flex;
+    gap: var(--e-3);
+    margin-top: var(--e-1);
+    font-size: var(--t-petit);
+  }
+
+  .note__details dt {
+    color: var(--pierre-ombre);
+  }
+
+  .note__details dd {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .note__lien {
+    margin-top: auto;
+    padding-top: var(--e-2);
+    color: var(--pierre);
+  }
+
+  @media (max-width: 56rem) {
+    .avis__grille {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .avis__notes {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

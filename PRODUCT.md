@@ -39,14 +39,17 @@ Un restaurant de quartier dont le nom et le logo parlent de feu : une flamme ocr
 ## Brand Commitments
 
 - Nom : La Fiamma. Logo existant : flamme ocre, bûches et branche d'olivier vert olive, olive bleu nuit, lettrage serif bleu nuit sur fond grège (vectorisé dans `src/assets/`).
-- Pas de photos (choix du commanditaire) : identité portée par la typographie, le dessin du logo et un effet de chaleur en WebGL.
-- Le site ne doit pas avoir l'air généré par une IA (exigence explicite du commanditaire).
+- Direction « Trattoria » choisie par le commanditaire parmi trois maquettes (octobre 2026) : fond clair, Bodoni, grandes photos, couleurs du logo en aplats.
+- Photos d'illustration libres de droits (Unsplash) en attendant les vraies photos du restaurant, créditées et signalées comme telles.
+- Aucune icône flamme ni emoji : jugés « pas professionnels » par le commanditaire.
+- Le site doit faire professionnel et ne pas avoir l'air généré par une IA (exigences explicites du commanditaire).
 
 ## Evidence on Hand
 
 - Carte complète et prix (repris de l'ancien site, quelques coquilles corrigées).
-- Adresse, téléphone, e-mail, horaires.
-- Aucune photo, aucun avis client, aucune histoire de la maison : ne rien inventer (pas de date de fondation, pas de « four à bois », pas de témoignages, pas de note chiffrée).
+- Adresse, téléphone, e-mail, horaires (identiques sur Mappy, PagesJaunes et la fiche Google).
+- Notes publiques relevées le 5 octobre 2026 : Google 4,8/5 (176 avis), TheFork 9,4/10 (20 avis ; plats 9,2, service 9,6, ambiance 9,4). Dans `src/data/avis.ts`.
+- Aucune photo du restaurant, aucune histoire de la maison : ne rien inventer (pas de date de fondation, pas de « four à bois », pas de citation d'avis non autorisée).
 
 ## Product Principles
 

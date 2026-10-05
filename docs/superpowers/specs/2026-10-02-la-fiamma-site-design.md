@@ -73,3 +73,14 @@ Logo : l'illustration (flamme ocre, bûches, branche d'olivier) est vectorisée 
 - « Get27 » → « Get 27 » ; « IPA (Indian) » → « IPA »
 - Horaires repris des annuaires (Mappy / PagesJaunes) : lun–ven 12h–14h30 et 19h–22h30, sam 19h–22h30, dim fermé. À confirmer.
 - Mentions légales (raison sociale, SIRET, hébergeur) à fournir par le restaurant.
+
+## Révision du 5 octobre 2026 : direction « Trattoria »
+
+Le commanditaire a jugé la première version (nuit + chaleur WebGL, sans photos) pas assez professionnelle et a demandé de retirer la flamme, perçue comme un emoji. Trois maquettes de haut de page lui ont été présentées (Plein cadre, Diptyque, Trattoria) ; il a choisi **Trattoria**.
+
+- Fond pierre clair `#ece6da`, titres en Bodoni Moda, textes en Hanken Grotesk, couleurs du logo en aplats (braise, olive, nuit).
+- Photos d'illustration Unsplash (licence libre), créditées dans le pied de page et signalées « non contractuelles ».
+- Haut de page : « Pizze, pasta & antipasti à Courbevoie », disque de pizza qui tourne au défilement, étiquette « Pizza du mois » lue dans les données, statut en direct, téléphone, note TheFork.
+- Carte en onglets avec une photo par rubrique. Nouvelles sections : avis (notes Google et TheFork vérifiées et datées, liens vers les plateformes, sans citer d'avis) et accès (plan MapLibre + OpenFreeMap recoloré, horaires, itinéraires).
+- Plus aucune icône flamme ni emoji ; favicon en monogramme « F ».
+- Retirés : effet WebGL, Young Serif, logo illustré affiché.

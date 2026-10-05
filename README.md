@@ -2,11 +2,11 @@
 
 Site de La Fiamma, pizzeria et cuisine italienne au 61 rue de Bitche, 92400 Courbevoie.
 
-Une seule page : la carte complète, le statut d'ouverture en direct (heure de Paris), la réservation par téléphone ou par e-mail pré-rempli, les horaires et l'adresse.
+Une seule page : la carte complète en onglets, le statut d'ouverture en direct (heure de Paris), les notes Google et TheFork, un plan d'accès, et la réservation par téléphone ou par e-mail pré-rempli.
 
 ## Modifier le contenu
 
-Tout le contenu vit dans deux fichiers. Il n'y a rien d'autre à toucher.
+Tout le contenu vit dans `src/data/`. Il n'y a rien d'autre à toucher.
 
 | Pour changer… | Fichier | Où |
 |---|---|---|
@@ -14,7 +14,9 @@ Tout le contenu vit dans deux fichiers. Il n'y a rien d'autre à toucher.
 | la pizza du mois | `src/data/carte.ts` | `pizzaDuMois` (nom, ingrédients, prix) |
 | les vins | `src/data/carte.ts` | `vins` |
 | les horaires d'ouverture | `src/data/infos.ts` | `horaires` (1 = lundi … 7 = dimanche, heures de Paris) |
-| téléphone, e-mail, adresse | `src/data/infos.ts` | en haut du fichier |
+| téléphone, e-mail, adresse, position sur le plan | `src/data/infos.ts` | en haut du fichier |
+| les notes Google et TheFork | `src/data/avis.ts` | `sources` (et `releveLe`, la date du relevé) |
+| les photos | `src/data/photos.ts` | `id` de l'image et crédit |
 
 Les prix sont des nombres (`4.5` s'affiche « 4,50 »). Après une modification, `npm test` vérifie que la carte est cohérente (prix positifs, pas de pizza perdue, etc.).
 
@@ -42,13 +44,16 @@ Pour servir le site sur `lafiamma92.fr`, dans le workflow, remplacer `BASE_PATH:
 ## Comment c'est fait
 
 - [Astro](https://astro.build) en sortie statique : la carte est du vrai HTML, lisible sans JavaScript.
-- Polices auto-hébergées (Young Serif, Hanken Grotesk) : aucun appel à Google Fonts.
-- Le nom en haut de page est dessiné en WebGL (`src/scripts/chaleur.ts`) avec une déformation de chaleur et des braises. Le titre reste du vrai texte. L'effet s'arrête hors écran et devient une image fixe si l'appareil demande moins d'animations.
-- Le logo a été vectorisé depuis l'ancien site (`scripts/vectoriser-logo.py`).
+- Polices auto-hébergées, Bodoni Moda (titres) et Hanken Grotesk (textes) : aucun appel à Google Fonts.
+- La carte est en onglets (`src/lib/onglets.ts`), lisible aussi sans JavaScript.
+- Le plan d'accès utilise MapLibre et les tuiles libres OpenFreeMap (sans clé), chargés seulement à l'approche de la section (`src/scripts/plan.ts`).
+- Les photos sont servies par le CDN d'Unsplash, redimensionnées selon l'écran. Quand les vraies photos du restaurant arrivent, les mettre dans `public/photos/` et adapter `src/data/photos.ts`.
+- Le logo illustré a été vectorisé depuis l'ancien site (`src/assets/logo-illustration.svg`, via `scripts/vectoriser-logo.py`) ; il n'est plus affiché, mais reste disponible.
 - Données structurées schema.org `Restaurant` (adresse, horaires, carte) pour les moteurs de recherche.
 
 ## À confirmer avec le restaurant avant la mise en ligne
 
-- Les horaires, repris des annuaires en ligne.
+- Les photos : celles du site sont des photos d'illustration libres de droits, à remplacer par les leurs.
+- L'envie de montrer des avis clients en entier (le site n'affiche que les notes et renvoie vers Google et TheFork).
 - Les corrections faites sur la carte de l'ancien site : « 4 Formaggi », « Valpolicella DOC », « Côtes de Provence », « Get 27 ».
 - Les mentions légales (raison sociale, SIRET, hébergeur), obligatoires en France.
