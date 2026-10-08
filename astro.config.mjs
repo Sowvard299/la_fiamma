@@ -11,4 +11,6 @@ export default defineConfig({
   server: { host: '127.0.0.1' },
   // MapLibre (~800 Ko) n'est chargé qu'à l'approche du plan d'accès : un gros morceau assumé.
   vite: { build: { chunkSizeWarningLimit: 1100 }, worker: { format: 'es' } },
+  // Les styles du site (une dizaine de Ko) sont intégrés à la page : aucun aller-retour avant le premier affichage.
+  build: { inlineStylesheets: 'always' },
 });

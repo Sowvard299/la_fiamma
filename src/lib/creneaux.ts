@@ -25,6 +25,8 @@ export function creneaux(
   semaine: Semaine,
   maintenant?: { date: string; minutes: number },
 ): string[] {
+  // Les dates "AAAA-MM-JJ" se comparent comme du texte.
+  if (maintenant && isoDate < maintenant.date) return [];
   const deja = maintenant?.date === isoDate ? maintenant.minutes : -1;
   return semaine[jourIsoDeDate(isoDate)].flatMap((plage) => {
     const liste: string[] = [];

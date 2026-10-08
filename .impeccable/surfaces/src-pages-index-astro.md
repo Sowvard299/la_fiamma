@@ -5,21 +5,21 @@ primary_target: "src/pages/index.astro"
 related_targets: []
 ---
 
-# Surface : page d'accueil (une page)
+# Surface : page d'accueil
 
 Mode : Persuade. Le visiteur vient voir la carte, savoir si c'est ouvert et réserver.
-Direction épinglée par le commanditaire (« A. La Fiamma, la nuit ») : pas de tirage concept-seed. Pas de génération d'image disponible : build code-led.
+Direction « Trattoria » choisie par le commanditaire parmi trois maquettes (octobre 2026), après l'abandon de la direction « nuit / WebGL » jugée pas assez professionnelle. Build code-led, pas de génération d'image.
 
 ## Direction contract
 
-THESIS: la page est un feu qu'on regarde de près, puis la carte qu'on lit à sa lumière. Refuse le hero photo + titre centré + bouton + trois cartes « spécialités / ambiance / livraison ».
+THESIS: une trattoria de quartier en grand format : ce qu'on mange et où, tout de suite, puis la carte entière lisible sur téléphone. Refuse le hero photo plein écran + titre centré + trois cartes « spécialités / ambiance / livraison ».
 
-OWN-WORLD: palette pleine, chaque couleur possède une région : nuit #1C2E3B (feu, réserver), braise #C8873A (bande pizza du mois), pierre #E4DED1 (carte), olive #4D5226 (bloc pizze bianche), pierre-ombre #D3CBBB (pied de page avec le dessin du logo). Young Serif pour tout ce qui se nomme, Hanken Grotesk pour ce qui se lit et se compte (chiffres tabulaires). Lignes de plats à points de conduite, comme une carte imprimée ; boutons à angles vifs ; pas de cartes, pas d'ombres, pas d'eyebrow.
+OWN-WORLD: fond pierre #ece6da, Bodoni Moda pour nommer, Hanken Grotesk pour lire et compter ; braise, olive et nuit du logo posées en aplats entiers (étiquette, bloc, section) ; angles vifs, une seule forme ronde (la pizza), lignes de plats à points de conduite, aucune icône décorative.
 
-STORY: on voit la flamme et le nom, on sait tout de suite si c'est ouvert et où c'est ; on lit la carte sans effort sur téléphone ; on appelle ou on prépare un e-mail en un geste.
+STORY: le visiteur voit la pizza et « Pizze, pasta & antipasti à Courbevoie », sait si c'est ouvert maintenant, parcourt ou cherche dans la carte, lit les notes Google et TheFork, trouve le plan et les horaires, puis appelle, réserve sur TheFork ou prépare un e-mail.
 
-FIRST VIEWPORT: plein écran nuit, canvas WebGL. Nav fine en haut : flamme du logo à gauche, Carte / Horaires / Réserver à droite. « La » puis « Fiamma » en Young Serif géant (~25vw) ancré en bas à gauche, ondulant dans une chaleur qui monte du bas, braises qui s'élèvent. Sous le nom, une bande : statut en direct avec flamme allumée/éteinte, adresse (lien itinéraire), action principale « Appeler » (braise, plein) et « Voir la carte ».
+FIRST VIEWPORT: en-tête fin (nom en Bodoni, La carte / Avis / Accès et horaires, bouton Réserver nuit). À gauche, le titre en Bodoni 3 à 6,75 rem, une phrase, « Réserver une table » (braise) et « Voir la carte » (ligne), puis deux rangées d'infos : statut en direct, téléphone et note TheFork. À droite, la scène : aplat olive, disque de pizza qui tourne au défilement, verre de spritz, étiquette braise « Pizza du mois ». Sur mobile, la scène passe au-dessus du texte.
 
-FORM: direction A de la liste présentée (1/3), épinglée par l'utilisateur ; seed key : aucun (direction épinglée). Signature : le curseur (ou le doigt) chauffe l'air autour de lui, la chaleur refroidit quand on quitte le feu en défilant. Motion : un seul moment, la chaleur ; ailleurs, seul l'index de la carte glisse (ease-out expo).
+FORM: direction C « Trattoria » des trois maquettes présentées (choisie par le commanditaire) ; seed key : aucun (direction épinglée). Signature : la pizza qui tourne avec le défilement et la carte en onglets avec recherche. Motion : arrivée douce de la scène, rotation liée au défilement, rien d'autre ; tout s'arrête en mouvement réduit.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

@@ -112,15 +112,18 @@ import { infos } from '../data/infos';
         alerte.textContent = '';
         return;
       }
-      const liste = creneaux(date.value, infos.horaires, aujourdhuiAParis(new Date()));
+      const maintenant = aujourdhuiAParis(new Date());
+      const liste = creneaux(date.value, infos.horaires, maintenant);
       if (liste.length === 0) {
         const jour = jourIsoDeDate(date.value);
         heure.append(option('', 'Aucun créneau'));
         heure.disabled = true;
         alerte.textContent =
-          infos.horaires[jour].length === 0
-            ? `Le restaurant est fermé le ${NOMS_JOURS[jour]}. Choisissez un autre jour.`
-            : 'Il n’y a plus de créneau aujourd’hui. Choisissez un autre jour, ou appelez-nous.';
+          date.value < maintenant.date
+            ? 'Cette date est déjà passée. Choisissez une date à venir.'
+            : infos.horaires[jour].length === 0
+              ? `Le restaurant est fermé le ${NOMS_JOURS[jour]}. Choisissez un autre jour.`
+              : 'Il n’y a plus de créneau aujourd’hui. Choisissez un autre jour, ou appelez-nous.';
         return;
       }
       alerte.textContent = '';

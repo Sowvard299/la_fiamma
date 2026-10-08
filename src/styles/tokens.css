@@ -13,6 +13,8 @@
   --braise: #c8873a;
   --braise-vive: #e3a257;
   --braise-texte: #7e5016;
+  /* Braise lisible en grand corps sur la pierre (3,4:1). */
+  --braise-titre: #a7702f;
   --olive: #4d5226;
   --olive-trait: #6b7040;
   --ouvert: #4f9a5a;

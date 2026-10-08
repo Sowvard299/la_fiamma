@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-delegated: Astro en sortie statique, TypeScript vanilla côté client, WebGL écrit à la main. Choisi pour une carte en vrai HTML (référencement, lecture sans JS), un poids minimal sur mobile et un hébergement gratuit (GitHub Pages, puis le domaine lafiamma92.fr).
+delegated: Astro en sortie statique, TypeScript vanilla côté client, MapLibre et OpenFreeMap pour le plan d'accès. Choisi pour une carte en vrai HTML (référencement, lecture sans JS), un poids minimal sur mobile et un hébergement gratuit (GitHub Pages, puis le domaine lafiamma92.fr).
 
 ## Users
 
@@ -25,16 +25,16 @@ Un restaurant de quartier dont le nom et le logo parlent de feu : une flamme ocr
 
 ## Operating Context
 
-- Ouvert du lundi au vendredi de 12h à 14h30 et de 19h à 22h30, le samedi de 19h à 22h30, fermé le dimanche (repris des annuaires, à confirmer).
-- Réservation par téléphone (01 43 33 77 58) ou par e-mail (lafiamma92400@gmail.com). Pas de système de réservation en ligne.
+- Ouvert du lundi au vendredi de 12h à 14h30 et de 19h à 22h30, le samedi de 19h à 22h30, fermé le dimanche (identiques sur Mappy, PagesJaunes et la fiche Google).
+- Réservation par téléphone (01 43 33 77 58), par e-mail pré-rempli (lafiamma92400@gmail.com) ou en ligne sur TheFork, où le restaurant affiche ses disponibilités. Vente à emporter indiquée sur sa fiche Google (à confirmer).
 - La pizza du mois change : elle doit se modifier en une ligne.
 
 ## Capabilities and Constraints
 
-- Une seule page en français.
+- Une page d'accueil en français, plus une page de mentions légales et une page 404.
 - Le contenu (carte, horaires, contacts) vit dans `src/data/` et ne doit être modifié qu'à cet endroit.
 - Le formulaire de réservation compose un e-mail dans la messagerie du visiteur ; il n'envoie rien lui-même.
-- Mentions légales à compléter par le restaurant (raison sociale, SIRET, hébergeur).
+- Mentions légales à compléter par le restaurant (raison sociale, SIRET, directeur de la publication) ; l'hébergeur et l'absence de cookies sont déjà indiqués.
 
 ## Brand Commitments
 
@@ -48,7 +48,7 @@ Un restaurant de quartier dont le nom et le logo parlent de feu : une flamme ocr
 
 - Carte complète et prix (repris de l'ancien site, quelques coquilles corrigées).
 - Adresse, téléphone, e-mail, horaires (identiques sur Mappy, PagesJaunes et la fiche Google).
-- Notes publiques relevées le 5 octobre 2026 : Google 4,8/5 (176 avis), TheFork 9,4/10 (20 avis ; plats 9,2, service 9,6, ambiance 9,4). Dans `src/data/avis.ts`.
+- Notes publiques relevées le 8 octobre 2026 : Google 4,8/5 (177 avis), TheFork 9,4/10 (20 avis ; plats 9,2, service 9,6, ambiance 9,4). Dans `src/data/avis.ts`.
 - Aucune photo du restaurant, aucune histoire de la maison : ne rien inventer (pas de date de fondation, pas de « four à bois », pas de citation d'avis non autorisée).
 
 ## Product Principles
@@ -60,4 +60,4 @@ Un restaurant de quartier dont le nom et le logo parlent de feu : une flamme ocr
 
 ## Accessibility & Inclusion
 
-- Contrastes WCAG AA, navigation clavier, lecteurs d'écran (le nom en WebGL reste du vrai texte), respect de « réduire les animations ».
+- Contrastes WCAG AA, cibles tactiles d'au moins 24 px, navigation clavier (lien d'évitement, contour visible sur chaque fond), lecteurs d'écran, respect de « réduire les animations ».

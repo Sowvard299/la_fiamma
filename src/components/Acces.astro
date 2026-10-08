@@ -21,8 +21,8 @@ import { itineraire } from '../lib/liens';
         {`${infos.adresse.codePostal} ${infos.adresse.ville}`}
       </p>
       <p class="acces__itineraires">
-        <a class="lien-fort" href={itineraire.google}>Itinéraire Google Maps</a>
-        <a class="lien-fort" href={itineraire.apple}>Itinéraire Apple Plans</a>
+        <a class="bouton bouton--ligne" href={itineraire.google}>Itinéraire Google Maps</a>
+        <a class="bouton bouton--ligne" href={itineraire.apple}>Itinéraire Apple Plans</a>
       </p>
 
       <div id="horaires" class="acces__horaires">
@@ -85,9 +85,14 @@ import { itineraire } from '../lib/liens';
   .acces__itineraires {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--e-1) var(--e-3);
+    gap: 0.75rem;
+    max-width: 30rem;
     margin-top: var(--e-3);
-    font-size: var(--t-petit);
+  }
+
+  /* Deux boutons de même largeur, côte à côte ou l'un sous l'autre selon la place. */
+  .acces__itineraires > .bouton {
+    flex: 1 1 13rem;
   }
 
   .acces__horaires {
@@ -100,8 +105,8 @@ import { itineraire } from '../lib/liens';
   }
 
   /* Repère du restaurant sur le plan */
+  /* Pas de « position » ici : MapLibre positionne lui-même le repère (position absolue). */
   :global(.plan-repere) {
-    position: relative;
     padding: 0.55rem 0.9rem 0.6rem;
     font-family: var(--serif);
     font-size: 1.125rem;

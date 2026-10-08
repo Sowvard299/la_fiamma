@@ -78,6 +78,15 @@ const google = avis.sources.find((s) => s.nom === 'Google')!;
 
   .pied__colonne a {
     text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  /* Zone de clic agrandie sans décaler la mise en page. */
+  .pied__colonne a,
+  .pied__liens a {
+    display: inline-block;
+    padding-block: 0.3rem;
+    margin-block: -0.3rem;
   }
 
   .pied__colonne a:hover {
@@ -114,6 +123,18 @@ const google = avis.sources.find((s) => s.nom === 'Google')!;
   @media (max-width: 48rem) {
     .pied {
       padding-bottom: calc(var(--e-4) + 5rem + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .pied__grille {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--e-3);
+    }
+
+    .pied__liens {
+      flex-direction: column;
+      gap: 0.6rem;
     }
   }
 </style>

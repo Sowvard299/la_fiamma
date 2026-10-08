@@ -138,6 +138,21 @@
      "#9be7a3",
      "#b8ffc0"
     ]
+   },
+   "braise-titre": {
+    "role": "primary",
+    "displayName": "Braise titre",
+    "canonical": "oklch(58.9% 0.110 66)",
+    "tonalRamp": [
+     "#270000",
+     "#4a1100",
+     "#6e3300",
+     "#935600",
+     "#b9792a",
+     "#e19e53",
+     "#ffc278",
+     "#ffdf95"
+    ]
    }
   },
   "typographyMeta": {

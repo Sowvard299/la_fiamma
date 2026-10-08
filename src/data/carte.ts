@@ -188,12 +188,12 @@ export const sections: Section[] = [
           { nom: 'Gorgonzola', prix: 16 },
           { nom: 'Carbonara', prix: 16 },
           { nom: 'Salmone', prix: 17 },
-          { nom: 'Lasagne bolognaise', detail: 'Servies avec une salade', prix: 17 },
+          { nom: 'Lasagne bolognaise', detail: 'Avec une salade', prix: 17 },
         ],
       },
       {
         titre: 'Piatti',
-        note: 'Garniture au choix : frites, haricots verts ou pâtes (+4)',
+        note: 'Garniture au choix : frites, haricots verts ou pâtes (+4 €)',
         plats: [
           { nom: 'Bistecca di salmone', detail: "Pavé de saumon grillé, sauce à l'aneth", prix: 20 },
           { nom: 'Scaloppina alla milanese', detail: 'Escalope de poulet panée', prix: 18 },

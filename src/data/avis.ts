@@ -15,13 +15,13 @@ export interface SourceAvis {
 }
 
 export const avis = {
-  releveLe: '2026-10-05',
+  releveLe: '2026-10-08',
   sources: [
     {
       nom: 'Google',
       note: 4.8,
       sur: 5,
-      nombre: 176,
+      nombre: 177,
       url: 'https://www.google.com/maps/search/?api=1&query=La%20Fiamma%2C%2061%20rue%20de%20Bitche%2C%2092400%20Courbevoie',
       precision: 'Avis publics Google',
     },

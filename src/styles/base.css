@@ -84,9 +84,16 @@ svg {
   color: var(--nuit-profonde);
 }
 
+/* Contour de sélection au clavier : encre sur les fonds clairs, braise vive sur les fonds sombres. */
 :focus-visible {
-  outline: 2px solid var(--braise);
+  outline: 2px solid var(--focus, var(--encre));
   outline-offset: 3px;
+}
+
+.avis,
+.reserver,
+.bianca {
+  --focus: var(--braise-vive);
 }
 
 .sr {
@@ -166,6 +173,9 @@ svg {
 }
 
 .lien-fort {
+  display: inline-block;
+  padding-block: 0.3rem;
+  margin-block: -0.3rem;
   font-variation-settings: 'wght' 600;
   text-decoration-color: var(--braise);
   text-decoration-thickness: 2px;
@@ -227,7 +237,11 @@ svg {
   .avis,
   .reserver,
   .mois,
-  .bianca {
+  .bianca,
+  .avis *,
+  .reserver *,
+  .mois *,
+  .bianca * {
     color: #000 !important;
     background: none !important;
   }

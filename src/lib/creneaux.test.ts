@@ -33,6 +33,11 @@ describe('creneaux', () => {
     expect(creneaux('2026-10-05', semaine, maintenant)).toEqual([]);
   });
 
+  it('ne propose rien pour une date déjà passée (Safari iOS ignore la date minimale)', () => {
+    const maintenant = { date: '2026-10-08', minutes: 10 * 60 };
+    expect(creneaux('2026-10-05', semaine, maintenant)).toEqual([]);
+  });
+
   it('ne touche pas aux autres jours', () => {
     const maintenant = { date: '2026-10-05', minutes: 23 * 60 };
     expect(creneaux('2026-10-06', semaine, maintenant)[0]).toBe('12:00');

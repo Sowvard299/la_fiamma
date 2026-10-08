@@ -15,6 +15,7 @@ colors:
   braise: "#c8873a"
   braise-vive: "#e3a257"
   braise-texte: "#7e5016"
+  braise-titre: "#a7702f"
   olive: "#4d5226"
   olive-trait: "#6b7040"
   ouvert: "#4f9a5a"
@@ -116,7 +117,7 @@ Aucune icône décorative : pas de flamme, pas d'emoji. Le nom « La Fiamma » �
 
 ### Primary
 
-- **Braise** `#c8873a` : actions principales (Réserver une table), étiquette de la pizza du mois, esperluette du titre, soulignés des liens forts, étoiles des avis. Jamais en texte sur la pierre : on passe alors à **Braise texte** `#7e5016` (prix de la carte, 5,6:1).
+- **Braise** `#c8873a` : actions principales (Réserver une table), étiquette de la pizza du mois, esperluette du titre, soulignés des liens forts, étoiles des avis. Jamais en texte sur la pierre : on passe alors à **Braise texte** `#7e5016` pour le texte courant (prix de la carte, 5,6:1) et à **Braise titre** `#a7702f` pour les grands corps (l'esperluette du titre, 3,4:1).
 - **Nuit** `#16232c` : section Réserver, bouton Réserver de l'en-tête.
 
 ### Secondary
@@ -146,6 +147,8 @@ Aucune icône décorative : pas de flamme, pas d'emoji. Le nom « La Fiamma » �
 
 ### Named Rules
 
+**Contour clavier.** Encre sur les fonds clairs, braise vive sur la nuit et l'olive (variable `--focus`), toujours décalé de 3 px.
+
 **Pas d'eyebrow, pas d'icône.** Aucun petit label au-dessus d'un titre, aucune icône décorative. Les seuls signes graphiques sont la pastille de statut et les étoiles des notes.
 
 ## Layout
@@ -155,6 +158,8 @@ Aucune icône décorative : pas de flamme, pas d'emoji. Le nom « La Fiamma » �
 - La carte est en onglets collants sous l'en-tête. Chaque rubrique : photo à gauche (collante sur ordinateur), plats à droite. Sans JavaScript, toutes les rubriques s'affichent l'une sous l'autre.
 - Rythme vertical sur une base de 8 px ; sections espacées de 9 rem.
 - Sous 48 rem, une barre « Appeler / Réserver » apparaît en bas une fois le haut de page quitté.
+- Sous le titre du haut de page, deux rangées d'infos : le statut d'ouverture en direct sur toute la largeur, puis le téléphone et la note TheFork côte à côte.
+- Liens isolés et boutons : au moins 24 px de haut (zone de clic agrandie par un rembourrage compensé). Sur mobile, le pied de page passe sur une colonne.
 
 ## Elevation & Depth
 
@@ -196,7 +201,7 @@ Trois voies, dans cet ordre : le téléphone en grand, TheFork en lien, l'e-mail
 
 ### Plan d'accès
 
-MapLibre avec les tuiles libres OpenFreeMap, recolorées aux teintes du site ; repère « La Fiamma » en Bodoni sur fond nuit. Chargé seulement à l'approche de la section ; le défilement de la page n'est jamais capturé (Ctrl + molette ou deux doigts pour zoomer).
+MapLibre avec les tuiles libres OpenFreeMap, recolorées aux teintes du site avant le premier affichage ; repère « La Fiamma » en Bodoni sur fond nuit. Les deux itinéraires (Google Maps, Apple Plans) sont des boutons « ligne ». Si le plan ne charge pas, l'adresse et le lien Google Maps restent affichés. Chargé seulement à l'approche de la section ; le défilement de la page n'est jamais capturé (Ctrl + molette ou deux doigts pour zoomer).
 
 ## Do's and Don'ts
 

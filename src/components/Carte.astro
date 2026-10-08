@@ -78,16 +78,24 @@ const [rossa, bianca, supplements] = pizze.groupes;
         return (
           <section class="panneau" id={`carte-${r.id}`} role="tabpanel" aria-labelledby={`onglet-${r.id}`}>
             <figure class="panneau__photo">
-              <img
-                src={srcPhoto(photo, 800, 1000)}
-                srcset={srcsetPhoto(photo, [480, 800, 1100], 0.8)}
-                sizes="(max-width: 56rem) 100vw, 36vw"
-                alt={photo.alt}
-                width="800"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-              />
+              <picture>
+                {/* Sur mobile la photo est en paysage : on demande directement ce cadrage. */}
+                <source
+                  media="(max-width: 56rem)"
+                  srcset={srcsetPhoto(photo, [480, 720, 960], 1.6)}
+                  sizes="calc(100vw - 2.5rem)"
+                />
+                <img
+                  src={srcPhoto(photo, 800, 1000)}
+                  srcset={srcsetPhoto(photo, [480, 800, 1100], 0.8)}
+                  sizes="36vw"
+                  alt={photo.alt}
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </figure>
 
             <div class="panneau__contenu">
@@ -156,6 +164,20 @@ const [rossa, bianca, supplements] = pizze.groupes;
   if (carte) {
     activerOnglets(carte);
     activerRecherche(carte);
+
+    // Les photos des autres onglets se chargent dès que la carte approche : le changement d'onglet est instantané.
+    const precharger = new IntersectionObserver(
+      (entrees) => {
+        if (!entrees.some((e) => e.isIntersecting)) return;
+        precharger.disconnect();
+        for (const img of carte.querySelectorAll<HTMLImageElement>('.panneau__photo img')) img.loading = 'eager';
+      },
+      { rootMargin: '600px 0px' },
+    );
+    // Après le chargement complet : ces photos ne doivent pas ralentir le haut de page.
+    const lancer = () => precharger.observe(carte);
+    if (document.readyState === 'complete') lancer();
+    else window.addEventListener('load', lancer, { once: true });
   }
 </script>
 

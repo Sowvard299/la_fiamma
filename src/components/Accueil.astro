@@ -42,8 +42,8 @@ const thefork = avis.sources.find((s) => s.nom === 'TheFork')!;
     <div class="scene__disque">
       <img
         src={srcPhoto(photos.disque, 900, 900)}
-        srcset={srcsetPhoto(photos.disque, [520, 760, 1040, 1400], 1)}
-        sizes="(max-width: 52rem) 86vw, 44vw"
+        srcset={srcsetPhoto(photos.disque, [400, 520, 600, 760, 1040, 1400], 1)}
+        sizes="(max-width: 52rem) min(76vw, 23rem), min(39vw, 39rem)"
         alt=""
         width="900"
         height="900"
@@ -90,7 +90,7 @@ const thefork = avis.sources.find((s) => s.nom === 'TheFork')!;
   }
 
   .accueil__esperluette {
-    color: var(--braise);
+    color: var(--braise-titre);
   }
 
   .accueil__sous {
@@ -108,10 +108,11 @@ const thefork = avis.sources.find((s) => s.nom === 'TheFork')!;
     margin-top: var(--e-4);
   }
 
+  /* Deux rangées voulues : le statut en direct sur toute la largeur, puis téléphone et note. */
   .accueil__infos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--e-2) var(--e-4);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: var(--e-2) clamp(1.5rem, 4vw, 3rem);
     margin-top: var(--e-4);
     padding-top: var(--e-3);
     border-top: 1px solid var(--trait);
@@ -119,8 +120,19 @@ const thefork = avis.sources.find((s) => s.nom === 'TheFork')!;
     line-height: 1.4;
   }
 
+  .accueil__infos > div:first-child {
+    grid-column: 1 / -1;
+  }
+
   .accueil__infos dt {
     font-variation-settings: 'wght' 600;
+  }
+
+  /* Zone de clic agrandie sans décaler la mise en page. */
+  .accueil__infos a {
+    display: inline-block;
+    padding-block: 0.3rem;
+    margin-block: -0.3rem;
   }
 
   .accueil__infos dt a {
